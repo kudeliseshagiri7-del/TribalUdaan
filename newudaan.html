@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tribal Udaan | Learn Prepare Build your Future</title>
+
+    <link rel="stylesheet" href="newudaan.css">
+</head>
+
+<body>
+
+    <!-- LOGIN -->
+    <section id="loginPage" class="auth-page">
+        <div class="auth-box">
+
+            <h1>Tribal Udaan</h1>
+            <p>Learn | Prepare | Build your Future</p>
+
+            <input
+                type="email"
+                id="loginEmail"
+                placeholder="Enter Email"
+            >
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter Password"
+            >
+
+            <button onclick="login()">Login</button>
+
+            <p id="loginMessage"></p>
+
+            <p>
+                Don't have an account?
+                <button onclick="showRegister()">Register</button>
+            </p>
+
+        </div>
+    </section>
+
+
+    <!-- REGISTER -->
+    <section id="registerPage" class="auth-page hidden">
+
+        <div class="auth-box">
+
+            <h1>Create Account</h1>
+
+            <input
+                type="text"
+                id="registerName"
+                placeholder="Full Name"
+            >
+
+            <input
+                type="email"
+                id="registerEmail"
+                placeholder="Email"
+            >
+
+            <input
+                type="password"
+                id="registerPassword"
+                placeholder="Password"
+            >
+
+            <button type="button" onclick="register()">Register</button>
+
+            <p id="registerMessage"></p>
+
+            <button type="button" onclick="showLogin()">Back to Login</button>
+
+        </div>
+
+    </section>
+
+
+    <!-- MAIN APPLICATION -->
+    <div id="app" class="hidden">
+
+        <!-- NAVBAR -->
+        <header class="navbar">
+
+            <div class="logo">
+                Tribal Udaan
+            </div>
+
+            <button onclick="toggleDarkMode()">
+                🌙 Dark Mode
+            </button>
+
+            <button onclick="logout()">
+                Logout
+            </button>
+
+        </header>
+
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <button onclick="showPage('dashboard')">
+                🏠 Dashboard
+            </button>
+
+            <button onclick="showPage('courses')">
+                📚 Courses
+            </button>
+
+            <button onclick="showPage('materials')">
+                📖 Study Materials
+            </button>
+
+            <button onclick="showPage('quiz')">
+                📝 Quiz
+            </button>
+
+            <button onclick="showPage('assistant')">
+                🤖 Study Assistant
+            </button>
+
+            <button onclick="showPage('progress')">
+                📊 Progress
+            </button>
+
+            <button onclick="showPage('certificates')">
+                🏆 Certificates
+            </button>
+
+            <button onclick="showPage('profile')">
+                👤 Profile
+            </button>
+
+        </aside>
+
+
+        <!-- CONTENT -->
+        <main class="content">
+
+            <!-- DASHBOARD -->
+            <section id="dashboard" class="page">
+
+                <h1>Welcome to Tribal Udaan 👋</h1>
+
+                <p>
+                    Learn new skills, prepare for exams
+                    and build your future.
+                </p>
+
+                <div class="cards">
+
+                    <div class="card">
+                        <h2>06</h2>
+                        <p>Enrolled Courses</p>
+                    </div>
+
+                    <div class="card">
+                        <h2>24</h2>
+                        <p>Lessons Completed</p>
+                    </div>
+
+                    <div class="card">
+                        <h2>72%</h2>
+                        <p>Average Progress</p>
+                    </div>
+
+                    <div class="card">
+                        <h2>03</h2>
+                        <p>Certificates</p>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- COURSES -->
+            <section id="courses" class="page hidden">
+
+                <h1>Course Library</h1>
+
+                <input
+                    type="text"
+                    id="courseSearch"
+                    placeholder="Search courses..."
+                    onkeyup="searchCourses()"
+                >
+
+                <div id="courseList">
+
+                    <div class="course-card">
+
+                        <h2>HTML & CSS Mastery</h2>
+
+                        <p>32 Lessons • 8 Hours</p>
+
+                        <div class="progress">
+                            <div style="width:90%"></div>
+                        </div>
+
+                        <button onclick="continueCourse('HTML & CSS')">
+                            Continue Learning
+                        </button>
+
+                    </div>
+
+
+                    <div class="course-card">
+
+                        <h2>JavaScript Mastery</h2>
+
+                        <p>28 Lessons • 7 Hours</p>
+
+                        <div class="progress">
+                            <div style="width:54%"></div>
+                        </div>
+
+                        <button onclick="continueCourse('JavaScript')">
+                            Continue Learning
+                        </button>
+
+                    </div>
+
+
+                    <div class="course-card">
+
+                        <h2>Python Programming</h2>
+
+                        <p>30 Lessons • 9 Hours</p>
+
+                        <div class="progress">
+                            <div style="width:45%"></div>
+                        </div>
+
+                        <button onclick="continueCourse('Python')">
+                            Continue Learning
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- MATERIALS -->
+            <section id="materials" class="page hidden">
+
+                <h1>Study Materials</h1>
+
+                <div class="material-box">
+
+                    <h3>Previous Year Papers</h3>
+                    <button>Download</button>
+
+                </div>
+
+                <div class="material-box">
+
+                    <h3>Mock Test Papers</h3>
+                    <button>Open</button>
+
+                </div>
+
+                <div class="material-box">
+
+                    <h3>Revision Notes</h3>
+                    <button>View Notes</button>
+
+                </div>
+
+            </section>
+
+
+            <!-- QUIZ -->
+            <section id="quiz" class="page hidden">
+
+                <h1>Quiz</h1>
+
+                <div id="quizContainer">
+
+                    <h3 id="question"></h3>
+
+                    <div id="options"></div>
+
+                    <button onclick="nextQuestion()">
+                        Next Question
+                    </button>
+
+                    <p id="quizResult"></p>
+
+                </div>
+
+            </section>
+
+
+            <!-- WIKIPEDIA ASSISTANT -->
+            <section id="assistant" class="page hidden">
+
+                <h1>🤖 Wikipedia Study Assistant</h1>
+
+                <p>
+                    Search any topic and get learning information.
+                </p>
+
+                <div class="search-box">
+
+                    <input
+                        type="text"
+                        id="wikiSearch"
+                        placeholder="Search a topic..."
+                    >
+
+                    <button onclick="searchWikipedia()">
+                        Search
+                    </button>
+
+                </div>
+
+                <div id="wikiResult"></div>
+
+            </section>
+
+
+            <!-- PROGRESS -->
+            <section id="progress" class="page hidden">
+
+                <h1>My Progress</h1>
+
+                <h3>HTML & CSS</h3>
+
+                <div class="progress">
+                    <div style="width:90%"></div>
+                </div>
+
+                <h3>JavaScript</h3>
+
+                <div class="progress">
+                    <div style="width:72%"></div>
+                </div>
+
+                <h3>Python</h3>
+
+                <div class="progress">
+                    <div style="width:45%"></div>
+                </div>
+
+            </section>
+
+
+            <!-- CERTIFICATES -->
+            <section id="certificates" class="page hidden">
+
+                <h1>🏆 Certificates</h1>
+
+                <div class="certificate">
+
+                    <h2>Tribal Udaan</h2>
+
+                    <p>
+                        Certificate of Completion
+                    </p>
+
+                    <h3 id="certificateName">
+                        Student
+                    </h3>
+
+                    <button onclick="downloadCertificate()">
+                        Download Certificate
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- PROFILE -->
+            <section id="profile" class="page hidden">
+
+                <h1>My Profile</h1>
+
+                <input id="profileName" placeholder="Name">
+
+                <input id="profileEmail" placeholder="Email">
+
+                <button onclick="saveProfile()">
+                    Save Profile
+                </button>
+
+                <p id="profileMessage"></p>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <script src="newudaan.js"></script>
+    <script src="udaacourse.js"></script>
+    <script src="udaanquiz.js"></script>
+    <script src="udaanAPI.js"></script>
+
+</body>
+</html>

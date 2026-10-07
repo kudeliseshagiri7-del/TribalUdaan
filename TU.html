@@ -1,0 +1,2797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tribal Uddan | Learning Platform</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Segoe UI",Arial,sans-serif;
+    background:#f4f8f5;
+    color:#17352d;
+    transition:.3s;
+}
+
+button,input,select,textarea{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+    border:none;
+}
+
+a{
+    text-decoration:none;
+}
+
+.app{
+    min-height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    width:245px;
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    background:linear-gradient(180deg,#064c3b,#07372e);
+    color:white;
+    overflow-y:auto;
+    z-index:1000;
+}
+
+.logo{
+    padding:22px;
+    border-bottom:1px solid rgba(255,255,255,.15);
+}
+
+.logo h1{
+    font-size:22px;
+}
+
+.logo p{
+    font-size:11px;
+    color:#b7ddd0;
+    margin-top:5px;
+}
+
+.menu-title{
+    padding:18px 18px 7px;
+    font-size:11px;
+    color:#a7d1c3;
+    text-transform:uppercase;
+}
+
+.menu-btn{
+    width:calc(100% - 20px);
+    margin:3px 10px;
+    padding:12px 15px;
+    background:transparent;
+    color:#e7f5f0;
+    border-radius:24px;
+    text-align:left;
+    font-size:14px;
+}
+
+.menu-btn:hover,
+.menu-btn.active{
+    background:#20a875;
+}
+
+/* MAIN */
+
+.main{
+    margin-left:245px;
+    min-height:100vh;
+}
+
+.topbar{
+    height:70px;
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 30px;
+    border-bottom:1px solid #e0e8e3;
+    position:sticky;
+    top:0;
+    z-index:500;
+}
+
+.search{
+    width:400px;
+    padding:11px 17px;
+    border:1px solid #dfe7e2;
+    border-radius:25px;
+    background:#f7f9f8;
+}
+
+.top-right{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.icon-btn{
+    background:transparent;
+    font-size:20px;
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    cursor:pointer;
+}
+
+.avatar{
+    width:40px;
+    height:40px;
+    background:#087a5c;
+    color:white;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+/* PAGES */
+
+.page{
+    display:none;
+    padding:30px;
+}
+
+.page.active{
+    display:block;
+    animation:fade .3s;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(8px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* COMMON */
+
+.card{
+    background:white;
+    border:1px solid #e0e8e3;
+    border-radius:14px;
+    padding:22px;
+    margin-bottom:20px;
+}
+
+.btn{
+    background:#079267;
+    color:white;
+    padding:11px 18px;
+    border-radius:8px;
+    font-weight:600;
+}
+
+.btn:hover{
+    background:#056e50;
+}
+
+.outline{
+    background:white;
+    color:#087a5c;
+    border:1px solid #087a5c;
+    padding:10px 16px;
+    border-radius:8px;
+}
+
+.grid{
+    display:grid;
+    gap:18px;
+}
+
+.grid-2{
+    grid-template-columns:repeat(2,1fr);
+}
+
+.grid-3{
+    grid-template-columns:repeat(3,1fr);
+}
+
+.grid-4{
+    grid-template-columns:repeat(4,1fr);
+}
+
+/* HOME */
+
+.hero{
+    min-height:250px;
+    border-radius:17px;
+    padding:30px;
+    color:white;
+    background:
+    linear-gradient(90deg,rgba(4,72,54,.97),rgba(4,72,54,.7)),
+    linear-gradient(135deg,#174f40,#8ca88d);
+}
+
+.hero h1{
+    font-size:30px;
+    margin:10px 0;
+}
+
+.hero p{
+    max-width:600px;
+    color:#e4f5ee;
+}
+
+.exam-box{
+    margin-top:22px;
+    background:white;
+    color:#17352d;
+    padding:15px;
+    border-radius:12px;
+    max-width:600px;
+    display:flex;
+    gap:20px;
+    align-items:center;
+}
+
+.exam-box select{
+    padding:10px;
+    border:1px solid #ddd;
+    border-radius:7px;
+    width:100%;
+}
+
+.stats{
+    margin-top:22px;
+}
+
+.stat{
+    padding:20px;
+    background:white;
+    border:1px solid #e0e8e3;
+    border-radius:13px;
+}
+
+.stat span{
+    font-size:27px;
+}
+
+.stat h2{
+    margin-top:8px;
+}
+
+.stat p{
+    color:#718078;
+}
+
+/* COURSE */
+
+.course{
+    border:1px solid #dfe8e3;
+    border-radius:13px;
+    overflow:hidden;
+    background:white;
+}
+
+.course-top{
+    height:110px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:48px;
+    background:#eaf5ef;
+}
+
+.course-body{
+    padding:17px;
+}
+
+.course-body h3{
+    margin-bottom:8px;
+}
+
+.course-body p{
+    color:#718078;
+    font-size:13px;
+    line-height:1.5;
+}
+
+.progress{
+    height:8px;
+    background:#e3ebe7;
+    border-radius:10px;
+    overflow:hidden;
+    margin:12px 0;
+}
+
+.progress div{
+    height:100%;
+    background:#10a879;
+}
+
+/* RESOURCE */
+
+.resource{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.resource-info h3{
+    margin-bottom:6px;
+}
+
+.resource-info p{
+    color:#718078;
+    font-size:13px;
+}
+
+.resource-type{
+    color:#087a5c;
+    font-size:11px;
+    font-weight:bold;
+}
+
+/* QUIZ */
+
+.question{
+    font-size:20px;
+    margin:20px 0;
+}
+
+.option{
+    display:block;
+    width:100%;
+    text-align:left;
+    background:#f8faf9;
+    border:1px solid #dce6e1;
+    padding:13px;
+    border-radius:8px;
+    margin:8px 0;
+}
+
+.option:hover{
+    border-color:#079267;
+    background:#edf9f4;
+}
+
+/* PROFILE */
+
+.profile-card{
+    display:flex;
+    gap:25px;
+    align-items:center;
+}
+
+.big-avatar{
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    background:#087a5c;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:35px;
+    font-weight:bold;
+}
+
+/* FORM */
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:6px;
+    font-weight:600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #d9e3de;
+    border-radius:8px;
+    outline:none;
+}
+
+/* LOGIN */
+
+.auth{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#064c3b,#20a875);
+}
+
+.auth-box{
+    width:420px;
+    max-width:92%;
+    background:white;
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 20px 50px rgba(0,0,0,.2);
+}
+
+.auth-box h1{
+    color:#064c3b;
+    margin-bottom:8px;
+}
+
+.auth-box p{
+    color:#718078;
+    margin-bottom:20px;
+}
+
+.auth-switch{
+    margin-top:18px;
+    color:#087a5c;
+    cursor:pointer;
+}
+
+/* REVISION */
+
+.flow{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.flow-item{
+    background:#e7f6ef;
+    color:#087a5c;
+    padding:15px 20px;
+    border-radius:30px;
+    font-weight:bold;
+}
+
+.arrow{
+    font-size:25px;
+}
+
+/* NOTIFICATION */
+
+.toast{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    background:#063f31;
+    color:white;
+    padding:14px 20px;
+    border-radius:8px;
+    opacity:0;
+    transform:translateY(30px);
+    transition:.3s;
+    z-index:3000;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* MOBILE */
+
+.mobile{
+    display:none;
+}
+
+@media(max-width:900px){
+
+    .sidebar{
+        transform:translateX(-100%);
+        transition:.3s;
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .mobile{
+        display:block;
+    }
+
+    .search{
+        width:180px;
+    }
+
+    .grid-4,
+    .grid-3,
+    .grid-2{
+        grid-template-columns:1fr;
+    }
+
+    .page{
+        padding:18px;
+    }
+
+    .exam-box{
+        flex-direction:column;
+        align-items:stretch;
+    }
+}
+
+/* DARK */
+
+body.dark{
+    background:#10231e;
+    color:#edf7f3;
+}
+
+body.dark .topbar,
+body.dark .card,
+body.dark .stat,
+body.dark .course,
+body.dark .resource,
+body.dark .auth-box{
+    background:#18332b;
+    color:white;
+    border-color:#285247;
+}
+
+body.dark .search{
+    background:#18332b;
+    color:white;
+}
+
+body.dark input,
+body.dark select,
+body.dark textarea{
+    background:#10231e;
+    color:white;
+    border-color:#396458;
+}
+
+body.dark .outline{
+    background:#18332b;
+    color:#8ce0c3;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= LOGIN ================= -->
+
+<div id="authPage" class="auth">
+
+    <div class="auth-box">
+
+        <h1>🌿 Tribal Uddan</h1>
+        <p>Learn • Practice • Revise • Build Your Future</p>
+
+        <form id="registerForm" onsubmit="register(event)">
+
+            <div class="form-group">
+                <label for="regName">Student Name</label>
+                <input id="regName" name="name" autocomplete="name" placeholder="Enter your name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="regEmail">Email</label>
+                <input id="regEmail" name="email" type="email" autocomplete="email" placeholder="Enter email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="regPassword">Password</label>
+                <input id="regPassword" name="password" type="password" autocomplete="new-password" placeholder="Create password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="regExam">Target Exam</label>
+
+                <select id="regExam" name="exam" required>
+                    <option value="" selected disabled>Select Exam</option>
+                    <option>APPSC Group 1</option>
+                    <option>APPSC Group 2</option>
+                    <option>APPSC Group 3</option>
+                    <option>APPSC Group 4</option>
+                    <option>TET & DSC</option>
+                    <option>UPSC Civil Services</option>
+                    <option>UPSC CDS</option>
+                    <option>UPSC NDA</option>
+                    <option>UPSC CAPF</option>
+                    <option>SSC CGL</option>
+                    <option>SSC CHSL</option>
+                    <option>SSC MTS</option>
+                    <option>Banking</option>
+                    <option>Railway</option>
+                    <option>CTET</option>
+                    <option>Other Government Exam</option>
+                </select>
+
+            </div>
+
+            <button class="btn" type="submit">
+                Create Account
+            </button>
+
+            <div class="auth-switch" onclick="showLogin()">
+                Already registered? Login
+            </div>
+
+        </form>
+
+        </div>
+
+
+        <div id="loginForm" style="display:none">
+
+            <div class="form-group">
+                <label>Email</label>
+                <input id="loginEmail" type="email">
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input id="loginPassword" type="password">
+            </div>
+
+            <button class="btn" onclick="login()">
+                Login
+            </button>
+
+            <div class="auth-switch" onclick="showRegister()">
+                Create a new account
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= APPLICATION ================= -->
+
+<div id="app" class="app" style="display:none">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="logo">
+        <h1>🌿 Tribal Uddan</h1>
+        <p>Learn • Prepare • Build Your Future</p>
+    </div>
+
+    <div class="menu-title">Main</div>
+
+    <button class="menu-btn active" onclick="showPage('home',this)">
+        🏠 Home
+    </button>
+
+    <button class="menu-btn" onclick="showPage('courses',this)">
+        📚 Course
+    </button>
+
+
+    <div class="menu-title">Learn</div>
+
+    <button class="menu-btn" onclick="showPage('learn',this)">
+        📖 Study Materials
+    </button>
+
+    <button class="menu-btn" onclick="showPage('videos',this)">
+        🎥 Video Classes
+    </button>
+
+    <button class="menu-btn" onclick="showPage('links',this)">
+        🔗 Online Study Links
+    </button>
+
+
+    <div class="menu-title">Practice</div>
+
+    <button class="menu-btn" onclick="showPage('quiz',this)">
+        📝 Daily Quiz
+    </button>
+
+    <button class="menu-btn" onclick="showPage('mock',this)">
+        ⏱️ Mock Test
+    </button>
+
+    <button class="menu-btn" onclick="openPYQ()">
+        📄 Previous Year Papers
+    </button>
+
+
+    <div class="menu-title">Revise</div>
+
+    <button class="menu-btn" onclick="showPage('revise',this)">
+        🔄 Revision
+    </button>
+
+
+    <div class="menu-title">My Learning</div>
+
+    <button class="menu-btn" onclick="showPage('progress',this)">
+        📊 My Progress
+    </button>
+
+    <button class="menu-btn" onclick="showPage('assistant',this)">
+        ⚡ My API Assistant
+    </button>
+
+    <button class="menu-btn" onclick="showPage('profile',this)">
+        👤 Profile
+    </button>
+
+    <button class="menu-btn" onclick="logout()">
+        🚪 Logout
+    </button>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+<header class="topbar">
+
+    <button class="icon-btn mobile"
+            onclick="toggleSidebar()">☰</button>
+
+    <input
+        class="search"
+        id="search"
+        placeholder="Search courses, subjects, materials..."
+        oninput="searchContent()">
+
+    <div class="top-right">
+
+        <button class="icon-btn"
+                onclick="toggleDark()">🌙</button>
+
+        <button class="icon-btn"
+                onclick="notify('You have no new notifications')">
+            🔔
+        </button>
+
+        <div class="profile" onclick="showPage('profile')">
+
+            <div class="avatar" id="topAvatar">S</div>
+
+            <div>
+                <strong id="topName">Student</strong>
+                <small>Student</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- ================= HOME ================= -->
+
+<section id="home" class="page active">
+
+    <div class="hero">
+
+        <small>WELCOME BACK</small>
+
+        <h1>
+            Continue your journey,
+            <span id="welcomeName">Student</span> 🌿
+        </h1>
+
+        <p>
+            Learn, practice and revise everything you need
+            for your competitive examination.
+        </p>
+
+        <div class="exam-box">
+
+            <div style="font-size:30px">🎯</div>
+
+            <div style="flex:1">
+
+                <small>Target Exam</small>
+
+                <select id="dashboardExam"
+                        onchange="changeExam()">
+                </select>
+
+            </div>
+
+            <div style="min-width:150px">
+
+                <small>Preparation</small>
+
+                <div class="progress">
+                    <div id="heroProgress"></div>
+                </div>
+
+                <strong id="heroPercent">0%</strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="grid grid-4 stats">
+
+        <div class="stat">
+            <span>📚</span>
+            <h2 id="courseCount">0</h2>
+            <p>Courses</p>
+        </div>
+
+        <div class="stat">
+            <span>✅</span>
+            <h2 id="completedCount">0</h2>
+            <p>Completed</p>
+        </div>
+
+        <div class="stat">
+            <span>📝</span>
+            <h2 id="quizCount">0</h2>
+            <p>Quizzes Taken</p>
+        </div>
+
+        <div class="stat">
+            <span>📈</span>
+            <h2 id="overallPercent">0%</h2>
+            <p>Overall Progress</p>
+        </div>
+
+    </div>
+
+
+    <div class="grid grid-2" style="margin-top:20px">
+
+        <div class="card">
+
+            <h2>Continue Preparation</h2>
+
+            <p style="color:#718078;margin:8px 0 20px">
+                Pick up where you left off.
+            </p>
+
+            <div id="continueCourses"></div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Today's Learning Plan</h2>
+
+            <div style="margin-top:18px">
+
+                <p>📖 Study one topic</p>
+                <hr style="margin:12px 0">
+
+                <p>🎥 Watch a reference class</p>
+                <hr style="margin:12px 0">
+
+                <p>📝 Take a quiz</p>
+                <hr style="margin:12px 0">
+
+                <p>🔄 Revise what you learned</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>Recommended Courses</h2>
+
+        <div id="homeCourses"
+             class="grid grid-4"
+             style="margin-top:18px">
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= COURSES ================= -->
+
+<section id="courses" class="page">
+
+    <h1>📚 Competitive Exam Courses</h1>
+
+    <p style="color:#718078;margin:8px 0 22px">
+        Choose a course based on your selected examination.
+    </p>
+
+    <div id="courseList"
+         class="grid grid-3">
+    </div>
+
+</section>
+
+
+<!-- ================= LEARN ================= -->
+
+<section id="learn" class="page">
+
+    <h1>📖 Study Materials</h1>
+
+    <p style="color:#718078;margin:8px 0 22px">
+        Notes and reference material for your preparation.
+    </p>
+
+    <div id="materials"></div>
+
+</section>
+
+
+<!-- ================= VIDEOS ================= -->
+
+<section id="videos" class="page">
+
+    <h1>🎥 Video Reference Classes</h1>
+
+    <p style="color:#718078;margin:8px 0 22px">
+        Open the reference classes in YouTube.
+    </p>
+
+    <div id="videoList"
+         class="grid grid-2">
+    </div>
+
+</section>
+
+
+<!-- ================= LINKS ================= -->
+
+<section id="links" class="page">
+
+    <h1>🔗 Online Study Links</h1>
+
+    <p style="color:#718078;margin:8px 0 22px">
+        Useful websites for learning and practice.
+    </p>
+
+    <div id="linkList"></div>
+
+</section>
+
+
+<!-- ================= QUIZ ================= -->
+
+<section id="quiz" class="page">
+
+    <h1>📝 Daily Quiz</h1>
+
+    <p style="color:#718078;margin:8px 0 22px">
+        Test your understanding.
+    </p>
+
+    <div class="card"
+         id="quizBox">
+    </div>
+
+</section>
+
+
+<!-- ================= MOCK TEST ================= -->
+
+<section id="mock" class="page">
+
+    <h1>⏱️ Mock Test</h1>
+
+    <p style="color:#718078;margin:8px 0 22px">
+        Practice with a short timed test.
+    </p>
+
+    <div class="card">
+
+        <h2>General Studies Mock Test</h2>
+
+        <p style="margin:10px 0">
+            5 questions • 5 minutes
+        </p>
+
+        <button class="btn"
+                onclick="startMock()">
+            Start Mock Test
+        </button>
+
+    </div>
+
+    <div id="mockBox"></div>
+
+</section>
+
+
+<!-- ================= REVISE ================= -->
+
+<section id="revise" class="page">
+
+    <h1>🔄 Revision Centre</h1>
+
+    <p style="color:#718078;margin:8px 0 22px">
+        Follow your learning cycle.
+    </p>
+
+    <div class="card">
+
+        <div class="flow">
+
+            <div class="flow-item">📚 Course</div>
+
+            <div class="arrow">→</div>
+
+            <div class="flow-item">📖 Learn</div>
+
+            <div class="arrow">→</div>
+
+            <div class="flow-item">🎥 Watch</div>
+
+            <div class="arrow">→</div>
+
+            <div class="flow-item">📝 Practice</div>
+
+            <div class="arrow">→</div>
+
+            <div class="flow-item">🔄 Revise</div>
+
+            <div class="arrow">→</div>
+
+            <div class="flow-item">📊 Progress</div>
+
+        </div>
+
+    </div>
+
+
+    <div id="revisionTopics"
+         class="grid grid-3">
+    </div>
+
+</section>
+
+
+<!-- ================= PROGRESS ================= -->
+
+<section id="progress" class="page">
+
+    <h1>📊 My Progress</h1>
+
+    <p style="color:#718078;margin:8px 0 22px">
+        Your progress is calculated from your actual activity.
+    </p>
+
+    <div class="grid grid-2">
+
+        <div class="card">
+
+            <h2>Overall Progress</h2>
+
+            <div style="font-size:45px;
+                        color:#079267;
+                        margin:20px 0"
+                 id="progressBig">
+                0%
+            </div>
+
+            <div class="progress">
+                <div id="progressBar"></div>
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Quiz Performance</h2>
+
+            <div id="quizPerformance"
+                 style="margin-top:20px">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>Course-wise Progress</h2>
+
+        <div id="progressCourses"
+             style="margin-top:20px">
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= API ================= -->
+
+ <section id="api">
+
+        <div class="study-assistant-box">
+
+    <h2>🤖 Ask Your Study Question</h2>
+
+    <p>Search your study topic and get information from Wikipedia.</p>
+
+    <div class="api-search">
+        <input
+            type="text"
+            id="question"
+            placeholder="Ask anything here..."
+            onkeydown="if(event.key === 'Enter') searchWikipedia()"
+        >
+
+        <button onclick="searchWikipedia()">
+            🔍 Ask
+        </button>
+    </div>
+
+    <div id="answer"></div>
+
+</div>
+
+    </section>
+
+
+<!-- ================= PROFILE ================= -->
+
+<section id="profile" class="page">
+
+    <h1>👤 My Profile</h1>
+
+    <div class="card profile-card">
+
+        <div class="big-avatar"
+             id="bigAvatar">
+            S
+        </div>
+
+        <div style="flex:1">
+
+            <h2 id="profileName">Student</h2>
+
+            <p id="profileEmail"></p>
+
+            <p>
+                Target Exam:
+                <strong id="profileExam"></strong>
+            </p>
+
+        </div>
+
+        <button class="btn"
+                onclick="editProfile()">
+            Edit Profile
+        </button>
+
+    </div>
+
+</section>
+
+
+</main>
+
+</div>
+
+
+<div id="toast" class="toast"></div>
+
+
+<script>
+
+/* =====================================================
+   DATA
+===================================================== */
+
+const examSyllabus = {
+
+    "APPSC Group 1":[
+        "Indian Polity",
+        "History and Culture",
+        "Geography",
+        "Economy",
+        "Science & Technology",
+        "Current Affairs"
+    ],
+
+    "APPSC Group 2":[
+        "Indian Constitution",
+        "Indian History",
+        "Andhra Pradesh History",
+        "Indian Economy",
+        "Geography",
+        "Current Affairs"
+    ],
+
+    "APPSC Group 3":[
+        "General Studies",
+        "Mental Ability",
+        "Indian History",
+        "Geography",
+        "Current Affairs"
+    ],
+
+    "APPSC Group 4":[
+        "General Studies",
+        "Mental Ability",
+        "English",
+        "Arithmetic"
+    ],
+
+    "TET & DSC":[
+        "Child Development",
+        "Teaching Methodology",
+        "Language",
+        "Mathematics",
+        "Environmental Studies"
+    ],
+
+    "UPSC Civil Services":[
+        "Indian Polity",
+        "History",
+        "Geography",
+        "Economy",
+        "Environment",
+        "Science & Technology",
+        "Current Affairs"
+    ],
+
+    "UPSC CDS":[
+        "English",
+        "General Knowledge",
+        "Elementary Mathematics"
+    ],
+
+    "UPSC NDA":[
+        "Mathematics",
+        "General Ability",
+        "English",
+        "Science"
+    ],
+
+    "UPSC CAPF":[
+        "General Ability",
+        "General Studies",
+        "Current Affairs",
+        "Reasoning"
+    ],
+
+    "SSC CGL":[
+        "Quantitative Aptitude",
+        "Reasoning",
+        "English",
+        "General Awareness"
+    ],
+
+    "SSC CHSL":[
+        "English",
+        "Quantitative Aptitude",
+        "Reasoning",
+        "General Awareness"
+    ],
+
+    "SSC MTS":[
+        "Numerical Ability",
+        "Reasoning",
+        "English",
+        "General Awareness"
+    ],
+
+    "Banking":[
+        "Quantitative Aptitude",
+        "Reasoning",
+        "English",
+        "Banking Awareness",
+        "Current Affairs"
+    ],
+
+    "Railway":[
+        "Mathematics",
+        "General Intelligence",
+        "General Science",
+        "Current Affairs"
+    ],
+
+    "CTET":[
+        "Child Development",
+        "Pedagogy",
+        "Language",
+        "Mathematics",
+        "Environmental Studies"
+    ],
+
+    "Other Government Exam":[
+        "General Studies",
+        "Current Affairs",
+        "Reasoning",
+        "Quantitative Aptitude"
+    ]
+
+};
+
+
+const resources = [
+
+{
+title:"Indian Polity Notes",
+type:"PDF",
+url:"https://cdn.visionias.in/value_added_material/5ca16-polity.pdf",
+description:"Indian Polity reference notes."
+},
+
+{
+title:"Quantitative Aptitude",
+type:"PDF",
+url:"https://ycmou.ac.in/wp-content/uploads/custom-assets/ebooks/CMP332_Quantative%20Aptitude.pdf",
+description:"Quantitative Aptitude reference material."
+},
+
+{
+title:"Computer Basics",
+type:"PDF",
+url:"https://www.vfu.bg/en/e-Learning/Computer-Basics--computer_basics2.pdf",
+description:"Computer basics study material."
+},
+
+{
+title:"General Studies",
+type:"PDF",
+url:"https://cbseacademic.nic.in/web_material/CurriculumMain27/SecPart2/GeneralStudies_SecP2_2026-27.pdf",
+description:"General Studies reference PDF."
+}
+
+];
+
+
+const videos = [
+
+{
+title:"Reference Class 1",
+url:"https://www.youtube.com/watch?v=mGgNtaqR8Aw"
+},
+
+{
+title:"Reference Class 2",
+url:"https://www.youtube.com/watch?v=pPf-i6Ks_eg"
+},
+
+{
+title:"Quantitative Aptitude Reference Class",
+url:"https://www.youtube.com/watch?v=fDmUQSr_XJo"
+}
+
+];
+
+
+const links = [
+
+{
+title:"APPSC Group 1 Study Material",
+url:"https://kpiasacademy.com/appsc-group-1-study-material/"
+},
+
+{
+title:"Current Affairs",
+url:"https://abhyasiasacademy.com/free-current-affairs-for-upsc-appsc-tgpsc/"
+},
+
+{
+title:"Computer Basics",
+url:"https://www.geeksforgeeks.org/computer-science-fundamentals/basics-of-computer-and-its-operations/"
+},
+
+{
+title:"Aptitude Practice",
+url:"https://www.careerride.com/online-aptitude-test.aspx"
+},
+
+{
+title:"Previous Year Papers",
+url:"https://testbook.com/previous-year-papers"
+}
+
+];
+
+
+const examCourses = {
+
+    "APPSC Group 1":[
+        ["History","📜","Indian and Andhra Pradesh history"],
+        ["Indian Polity","⚖️","Constitution, governance and polity"],
+        ["Indian Economy","💰","Economy and development"],
+        ["Geography","🌍","Indian and world geography"],
+        ["Science & Technology","🔬","Science and technology"],
+        ["Current Affairs","📰","National and international current affairs"]
+    ],
+
+    "APPSC Group 2":[
+        ["Indian History","📜","Ancient, medieval and modern India"],
+        ["Andhra Pradesh History","🏛️","History and culture of Andhra Pradesh"],
+        ["Indian Constitution","⚖️","Constitution and governance"],
+        ["Indian Economy","💰","Indian economy and development"],
+        ["Geography","🌍","Indian geography"],
+        ["Current Affairs","📰","Current affairs and important events"]
+    ],
+
+    "APPSC Group 3":[
+        ["General Studies","📚","General studies topics"],
+        ["Mental Ability","🧠","Reasoning and mental ability"],
+        ["Indian History","📜","Indian history"],
+        ["Geography","🌍","Geography"],
+        ["Current Affairs","📰","Current affairs"]
+    ],
+
+    "APPSC Group 4":[
+        ["General Studies","📚","General studies"],
+        ["Mental Ability","🧠","Reasoning and mental ability"],
+        ["English","🔤","English language"],
+        ["Arithmetic","🔢","Arithmetic and basic mathematics"]
+    ],
+
+    "TET & DSC":[
+        ["Child Development","👶","Child development and pedagogy"],
+        ["Teaching Methodology","👩‍🏫","Teaching methods"],
+        ["Language","🔤","Language skills"],
+        ["Mathematics","🔢","Mathematics"],
+        ["Environmental Studies","🌱","Environmental studies"]
+    ],
+
+    "UPSC Civil Services":[
+        ["Indian Polity","⚖️","Constitution, governance and polity"],
+        ["History","📜","Ancient, medieval and modern history"],
+        ["Geography","🌍","Indian and world geography"],
+        ["Indian Economy","💰","Economy and development"],
+        ["Environment","🌱","Environment and ecology"],
+        ["Science & Technology","🔬","Science and technology"],
+        ["Current Affairs","📰","Current national and international affairs"]
+    ],
+
+    "UPSC CDS":[
+        ["English","🔤","English language"],
+        ["General Knowledge","📚","General knowledge and current affairs"],
+        ["Elementary Mathematics","🔢","Mathematics"]
+    ],
+
+    "UPSC NDA":[
+        ["Mathematics","🔢","NDA mathematics"],
+        ["General Ability","🧠","General ability"],
+        ["English","🔤","English"],
+        ["General Science","🔬","Science"]
+    ],
+
+    "UPSC CAPF":[
+        ["General Ability","🧠","General ability and intelligence"],
+        ["General Studies","📚","General studies"],
+        ["Current Affairs","📰","Current affairs"],
+        ["Reasoning","🧩","Reasoning and aptitude"]
+    ],
+
+    "SSC CGL":[
+        ["Quantitative Aptitude","🔢","Arithmetic and advanced mathematics"],
+        ["Reasoning","🧩","Logical and analytical reasoning"],
+        ["English","🔤","English comprehension and grammar"],
+        ["General Awareness","🌍","General awareness and current affairs"]
+    ],
+
+    "SSC CHSL":[
+        ["English","🔤","English language"],
+        ["Quantitative Aptitude","🔢","Quantitative aptitude"],
+        ["Reasoning","🧩","General intelligence"],
+        ["General Awareness","🌍","General awareness"]
+    ],
+
+    "SSC MTS":[
+        ["Numerical Ability","🔢","Numerical and mathematical ability"],
+        ["Reasoning","🧩","Reasoning ability"],
+        ["English","🔤","English language"],
+        ["General Awareness","🌍","General awareness"]
+    ],
+
+    "Banking":[
+        ["Quantitative Aptitude","🔢","Banking quantitative aptitude"],
+        ["Reasoning","🧩","Logical reasoning"],
+        ["English","🔤","English language"],
+        ["Banking Awareness","🏦","Banking and financial awareness"],
+        ["Current Affairs","📰","Banking and national current affairs"]
+    ],
+
+    "Railway":[
+        ["Mathematics","🔢","Railway mathematics"],
+        ["General Intelligence","🧠","Reasoning and intelligence"],
+        ["General Science","🔬","General science"],
+        ["Current Affairs","📰","Current affairs"]
+    ],
+
+    "CTET":[
+        ["Child Development","👶","Child development and pedagogy"],
+        ["Language I","🔤","Language I"],
+        ["Language II","🔤","Language II"],
+        ["Mathematics","🔢","Mathematics"],
+        ["Environmental Studies","🌱","Environmental studies"]
+    ],
+
+    "Other Government Exam":[
+        ["General Studies","📚","General studies"],
+        ["Current Affairs","📰","Current affairs"],
+        ["Reasoning","🧩","Reasoning"],
+        ["Quantitative Aptitude","🔢","Quantitative aptitude"]
+    ]
+
+};
+
+function getCoursesForExam(exam = user && user.exam ? user.exam : "APPSC Group 1") {
+
+    const selectedExam = examCourses[exam] || examCourses["APPSC Group 1"];
+
+    return selectedExam.map(([name, icon, description], index) => ({
+        name,
+        icon,
+        description,
+        resource: index
+    }));
+
+}
+
+/* =====================================================
+   USER DATA
+===================================================== */
+
+let user =
+JSON.parse(localStorage.getItem("tribalUser")) || null;
+
+let progress =
+JSON.parse(localStorage.getItem("tribalProgress")) || {};
+
+let quizHistory =
+JSON.parse(localStorage.getItem("tribalQuiz")) || [];
+
+let courses = getCoursesForExam();
+
+
+/* =====================================================
+   AUTH
+===================================================== */
+
+function showLogin(){
+
+    document.getElementById("registerForm").style.display="none";
+    document.getElementById("loginForm").style.display="block";
+
+}
+
+
+function showRegister(){
+
+    document.getElementById("registerForm").style.display="block";
+    document.getElementById("loginForm").style.display="none";
+
+}
+
+
+function register(event){
+
+    event.preventDefault();
+
+    const name =
+    document.getElementById("regName").value.trim();
+
+    const email =
+    document.getElementById("regEmail").value.trim();
+
+    const password =
+    document.getElementById("regPassword").value;
+
+    const exam =
+    document.getElementById("regExam").value;
+
+
+    if(!name || !email || !password || !exam){
+
+        notify("Please fill all fields");
+        return;
+
+    }
+
+
+    user={
+        name,
+        email,
+        password,
+        exam
+    };
+
+
+    localStorage.setItem(
+        "tribalUser",
+        JSON.stringify(user)
+    );
+
+
+    progress={};
+
+    localStorage.setItem(
+        "tribalProgress",
+        JSON.stringify(progress)
+    );
+
+
+    notify("Registration successful!");
+
+    openApp();
+
+}
+
+
+function login(){
+
+    const email =
+    document.getElementById("loginEmail").value.trim();
+
+    const password =
+    document.getElementById("loginPassword").value;
+
+
+    const saved =
+    JSON.parse(localStorage.getItem("tribalUser"));
+
+
+    if(
+        saved &&
+        saved.email===email &&
+        saved.password===password
+    ){
+
+        user=saved;
+
+        openApp();
+
+    }else{
+
+        notify("Invalid email or password");
+
+    }
+
+}
+
+
+function logout(){
+
+    localStorage.removeItem("tribalLoggedIn");
+
+    document.getElementById("app").style.display="none";
+
+    document.getElementById("authPage").style.display="flex";
+
+    showRegister();
+
+    notify("Logged out successfully");
+
+}
+
+
+/* =====================================================
+   OPEN APP
+===================================================== */
+
+function openApp(){
+
+    localStorage.setItem("tribalLoggedIn","true");
+
+    document.getElementById("authPage").style.display="none";
+
+    document.getElementById("app").style.display="block";
+
+    updateUser();
+
+    renderEverything();
+
+}
+
+
+function updateUser(){
+
+    if(!user) return;
+
+    const initial =
+    user.name.charAt(0).toUpperCase();
+
+
+    document.getElementById("topName").textContent=user.name;
+
+    document.getElementById("welcomeName").textContent=user.name;
+
+    document.getElementById("topAvatar").textContent=initial;
+
+    document.getElementById("bigAvatar").textContent=initial;
+
+    document.getElementById("profileName").textContent=user.name;
+
+    document.getElementById("profileEmail").textContent=user.email;
+
+    document.getElementById("profileExam").textContent=user.exam;
+
+
+    const select =
+    document.getElementById("dashboardExam");
+
+    select.innerHTML="";
+
+    Object.keys(examSyllabus).forEach(exam=>{
+
+        const option=document.createElement("option");
+
+        option.value=exam;
+
+        option.textContent=exam;
+
+        if(exam===user.exam)
+            option.selected=true;
+
+        select.appendChild(option);
+
+    });
+
+    courses = getCoursesForExam(user.exam);
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function showPage(id,button){
+
+    document.querySelectorAll(".page")
+    .forEach(p=>p.classList.remove("active"));
+
+    document.getElementById(id)
+    .classList.add("active");
+
+
+    document.querySelectorAll(".menu-btn")
+    .forEach(b=>b.classList.remove("active"));
+
+
+    if(button)
+        button.classList.add("active");
+
+
+    document.getElementById("sidebar")
+    .classList.remove("open");
+
+
+    renderEverything();
+
+}
+
+
+function toggleSidebar(){
+
+    document.getElementById("sidebar")
+    .classList.toggle("open");
+
+}
+
+
+/* =====================================================
+   EXAM
+===================================================== */
+
+function changeExam(){
+
+    const exam =
+    document.getElementById("dashboardExam").value;
+
+    user.exam=exam;
+
+    localStorage.setItem(
+        "tribalUser",
+        JSON.stringify(user)
+    );
+
+    courses = getCoursesForExam(exam);
+    updateUser();
+    renderEverything();
+
+    notify("Exam updated to "+exam);
+
+}
+
+
+/* =====================================================
+   COURSES
+===================================================== */
+
+function getCourseProgress(courseName){
+
+    return progress[courseName] || 0;
+
+}
+
+
+function setCourseProgress(courseName,value){
+
+    progress[courseName]=value;
+
+    localStorage.setItem(
+        "tribalProgress",
+        JSON.stringify(progress)
+    );
+
+    renderEverything();
+
+}
+
+
+function renderCourses(){
+
+    const html=courses.map(course=>{
+
+        const p=getCourseProgress(course.name);
+
+        let status="Pending";
+
+        if(p>0 && p<100)
+            status="In Progress";
+
+        if(p===100)
+            status="Completed";
+
+
+        return `
+
+        <div class="course">
+
+            <div class="course-top">
+                ${course.icon}
+            </div>
+
+            <div class="course-body">
+
+                <h3>${course.name}</h3>
+
+                <p>${course.description}</p>
+
+                <div class="progress">
+                    <div style="width:${p}%"></div>
+                </div>
+
+                <small>
+                    ${p}% • ${status}
+                </small>
+
+                <br><br>
+
+                <button
+                    class="btn"
+                    onclick="openCourse('${course.name}')">
+
+                    ${p===100 ? "Review Course":"Continue Learning"}
+
+                </button>
+
+            </div>
+
+        </div>
+
+        `;
+
+    }).join("");
+
+
+    document.getElementById("courseList").innerHTML=html;
+
+    document.getElementById("homeCourses").innerHTML=html;
+
+}
+
+
+/* =====================================================
+   OPEN COURSE
+===================================================== */
+
+function openCourse(name){
+
+    const index =
+    courses.findIndex(c=>c.name===name);
+
+    if(index>=0){
+
+        progress[name]=
+        Math.min(100,(progress[name]||0)+25);
+
+        localStorage.setItem(
+            "tribalProgress",
+            JSON.stringify(progress)
+        );
+
+        showPage("learn");
+
+        notify(name+" learning opened");
+
+    }
+
+}
+
+
+/* =====================================================
+   MATERIALS
+===================================================== */
+
+function renderMaterials(){
+
+    const container =
+    document.getElementById("materials");
+
+
+    container.innerHTML =
+    resources.map((r,index)=>`
+
+        <div class="card resource">
+
+            <div class="resource-info">
+
+                <div class="resource-type">
+                    ${r.type}
+                </div>
+
+                <h3>${r.title}</h3>
+
+                <p>${r.description}</p>
+
+            </div>
+
+            <a
+                class="btn"
+                href="${r.url}"
+                target="_blank">
+
+                Open Resource
+
+            </a>
+
+        </div>
+
+    `).join("");
+
+
+    container.innerHTML += `
+
+        <div class="card">
+
+            <h2>📤 Upload Your Own Notes</h2>
+
+            <p style="color:#718078;margin:10px 0">
+                Upload a PDF and keep its name inside this browser.
+            </p>
+
+            <input
+                type="file"
+                accept=".pdf"
+                onchange="savePDF(this)">
+
+            <div id="uploadedPDF"
+                 style="margin-top:15px">
+            </div>
+
+        </div>
+
+    `;
+
+
+    showUploadedPDF();
+
+}
+
+
+/* =====================================================
+   VIDEOS
+===================================================== */
+
+function renderVideos(){
+
+    document.getElementById("videoList").innerHTML =
+    videos.map(video=>`
+
+        <div class="card">
+
+            <div style="font-size:45px">
+                🎥
+            </div>
+
+            <h2>${video.title}</h2>
+
+            <p style="color:#718078;margin:10px 0 18px">
+                Reference video class
+            </p>
+
+            <a
+                class="btn"
+                href="${video.url}"
+                target="_blank">
+
+                Watch Class
+
+            </a>
+
+        </div>
+
+    `).join("");
+
+}
+
+
+/* =====================================================
+   LINKS
+===================================================== */
+
+function renderLinks(){
+
+    document.getElementById("linkList").innerHTML =
+    links.map(link=>`
+
+        <div class="card resource">
+
+            <div class="resource-info">
+
+                <h3>${link.title}</h3>
+
+                <p>
+                    Open the learning resource.
+                </p>
+
+            </div>
+
+            <a
+                class="btn"
+                href="${link.url}"
+                target="_blank">
+
+                Visit
+
+            </a>
+
+        </div>
+
+    `).join("");
+
+}
+
+
+/* =====================================================
+   PDF UPLOAD
+===================================================== */
+
+function savePDF(input){
+
+    if(!input.files.length)
+        return;
+
+    const file=input.files[0];
+
+    localStorage.setItem(
+        "uploadedPDF",
+        file.name
+    );
+
+    showUploadedPDF();
+
+    notify("PDF saved: "+file.name);
+
+}
+
+
+function showUploadedPDF(){
+
+    const name =
+    localStorage.getItem("uploadedPDF");
+
+    const box =
+    document.getElementById("uploadedPDF");
+
+    if(!box) return;
+
+    if(name){
+
+        box.innerHTML=`
+            📄 <strong>${name}</strong>
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   QUIZ
+===================================================== */
+
+const quizQuestions=[
+
+{
+q:"Which document contains the Constitution of India?",
+options:[
+"Indian Constitution",
+"Indian Penal Code",
+"Parliament Act",
+"Election Rules"
+],
+answer:0
+},
+
+{
+q:"What does CPU stand for?",
+options:[
+"Central Processing Unit",
+"Computer Primary Unit",
+"Central Program Utility",
+"Control Processing User"
+],
+answer:0
+},
+
+{
+q:"10% of 500 is?",
+options:[
+"25",
+"50",
+"75",
+"100"
+],
+answer:1
+}
+
+];
+
+
+let currentQuestion=0;
+let currentScore=0;
+
+
+function startQuiz(){
+
+    currentQuestion=0;
+    currentScore=0;
+
+    renderQuestion();
+
+}
+
+
+function renderQuestion(){
+
+    const q=
+    quizQuestions[currentQuestion];
+
+
+    document.getElementById("quizBox").innerHTML=`
+
+        <small>
+            Question ${currentQuestion+1}
+            of ${quizQuestions.length}
+        </small>
+
+        <div class="question">
+            ${q.q}
+        </div>
+
+        ${q.options.map((option,i)=>`
+
+            <button
+                class="option"
+                onclick="answerQuiz(${i})">
+
+                ${option}
+
+            </button>
+
+        `).join("")}
+
+    `;
+
+}
+
+
+function answerQuiz(choice){
+
+    if(
+        choice===
+        quizQuestions[currentQuestion].answer
+    ){
+
+        currentScore++;
+
+    }
+
+
+    currentQuestion++;
+
+
+    if(
+        currentQuestion<
+        quizQuestions.length
+    ){
+
+        renderQuestion();
+
+    }else{
+
+        finishQuiz();
+
+    }
+
+}
+
+
+function finishQuiz(){
+
+    const score =
+    Math.round(
+        currentScore/
+        quizQuestions.length*
+        100
+    );
+
+
+    quizHistory.push({
+
+        date:new Date().toLocaleDateString(),
+
+        score
+
+    });
+
+
+    localStorage.setItem(
+        "tribalQuiz",
+        JSON.stringify(quizHistory)
+    );
+
+
+    document.getElementById("quizBox").innerHTML=`
+
+        <h2>🎉 Quiz Completed</h2>
+
+        <p style="margin:15px 0">
+            You scored
+            <strong>${currentScore}</strong>
+            out of
+            <strong>${quizQuestions.length}</strong>.
+        </p>
+
+        <h2>${score}%</h2>
+
+        <br>
+
+        <button
+            class="btn"
+            onclick="startQuiz()">
+
+            Try Again
+
+        </button>
+
+    `;
+
+    renderEverything();
+
+}
+
+
+function renderQuizStart(){
+
+    if(
+        !document.getElementById("quizBox")
+        .innerHTML.trim()
+    ){
+
+        document.getElementById("quizBox").innerHTML=`
+
+            <h2>Ready to test yourself?</h2>
+
+            <p style="margin:12px 0 20px">
+                Answer ${quizQuestions.length}
+                questions.
+            </p>
+
+            <button
+                class="btn"
+                onclick="startQuiz()">
+
+                Start Quiz
+
+            </button>
+
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   MOCK TEST
+===================================================== */
+
+function startMock(){
+
+    const box =
+    document.getElementById("mockBox");
+
+    box.innerHTML=`
+
+        <div class="card">
+
+            <h2>Mock Test Started</h2>
+
+            <p style="margin:12px 0">
+                Answer the questions below.
+            </p>
+
+            <button
+                class="btn"
+                onclick="startQuiz()">
+
+                Start Test Questions
+
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   REVISION
+===================================================== */
+
+function renderRevision(){
+
+    document.getElementById("revisionTopics").innerHTML=
+
+    courses.map(course=>{
+
+        const p=
+        getCourseProgress(course.name);
+
+        return `
+
+        <div class="card">
+
+            <div style="font-size:40px">
+                ${course.icon}
+            </div>
+
+            <h2>${course.name}</h2>
+
+            <p style="color:#718078;margin:8px 0">
+                ${p}% completed
+            </p>
+
+            <button
+                class="outline"
+                onclick="openCourse('${course.name}')">
+
+                Revise Topic
+
+            </button>
+
+        </div>
+
+        `;
+
+    }).join("");
+
+}
+
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+function calculateOverall(){
+
+    let total=0;
+
+    courses.forEach(c=>{
+        total+=getCourseProgress(c.name);
+    });
+
+    return Math.round(
+        total/courses.length
+    );
+
+}
+
+
+function renderProgress(){
+
+    const overall=
+    calculateOverall();
+
+
+    document.getElementById("overallPercent")
+    .textContent=overall+"%";
+
+    document.getElementById("heroPercent")
+    .textContent=overall+"%";
+
+    document.getElementById("heroProgress")
+    .style.width=overall+"%";
+
+    document.getElementById("progressBig")
+    .textContent=overall+"%";
+
+    document.getElementById("progressBar")
+    .style.width=overall+"%";
+
+
+    document.getElementById("progressCourses")
+    .innerHTML=
+
+    courses.map(c=>{
+
+        const p=getCourseProgress(c.name);
+
+        return `
+
+        <div style="margin-bottom:20px">
+
+            <div style="
+                display:flex;
+                justify-content:space-between">
+
+                <strong>${c.name}</strong>
+
+                <span>${p}%</span>
+
+            </div>
+
+            <div class="progress">
+                <div style="width:${p}%"></div>
+            </div>
+
+        </div>
+
+        `;
+
+    }).join("");
+
+
+    document.getElementById("quizPerformance")
+    .innerHTML=
+
+    quizHistory.length
+    ? quizHistory.map(q=>`
+
+        <p style="margin-bottom:10px">
+            📅 ${q.date}
+            <strong style="float:right">
+                ${q.score}%
+            </strong>
+        </p>
+
+    `).join("")
+    :"No quizzes completed yet.";
+
+}
+
+
+/* =====================================================
+   HOME CONTINUE
+===================================================== */
+
+function renderContinue(){
+
+    const pending =
+    courses.filter(
+        c=>getCourseProgress(c.name)<100
+    );
+
+
+    document.getElementById("continueCourses")
+    .innerHTML=
+
+    pending.length
+
+    ? pending.slice(0,3).map(c=>`
+
+        <div style="
+            padding:12px;
+            background:#f3f8f5;
+            border-radius:8px;
+            margin-bottom:8px">
+
+            <strong>${c.icon} ${c.name}</strong>
+
+            <button
+                class="outline"
+                style="float:right;padding:5px 10px"
+                onclick="openCourse('${c.name}')">
+
+                Continue
+
+            </button>
+
+        </div>
+
+    `).join("")
+
+    :"🎉 All courses completed!";
+
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+function searchContent(){
+
+    const query=
+    document.getElementById("search")
+    .value
+    .toLowerCase();
+
+
+    if(!query) return;
+
+
+    const foundCourse=
+    courses.find(c=>
+        c.name.toLowerCase().includes(query)
+    );
+
+
+    const foundResource=
+    resources.find(r=>
+        r.title.toLowerCase().includes(query)
+    );
+
+
+    if(foundCourse){
+
+        showPage("courses");
+
+        notify(
+            "Found course: "+
+            foundCourse.name
+        );
+
+    }else if(foundResource){
+
+        showPage("learn");
+
+        notify(
+            "Found resource: "+
+            foundResource.title
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+function editProfile(){
+
+    const name=
+    prompt("Enter your name:",user.name);
+
+    if(!name) return;
+
+
+    const email=
+    prompt("Enter your email:",user.email);
+
+    if(!email) return;
+
+
+    user.name=name;
+    user.email=email;
+
+
+    localStorage.setItem(
+        "tribalUser",
+        JSON.stringify(user)
+    );
+
+
+    updateUser();
+
+    notify("Profile updated");
+
+}
+
+
+/* =====================================================
+   API ASSISTANT
+===================================================== */
+
+ <section id="api">
+
+        <div class="study-assistant-box">
+
+    <h2>🤖 Ask Your Study Question</h2>
+
+    <p>Search your study topic and get information from Wikipedia.</p>
+
+    <div class="api-search">
+        <input type="text"
+               id="question"
+               placeholder="Ask anything here..."
+               onkeydown="if(event.key === 'Enter') searchWikipedia()"></input>
+
+        <button onclick="searchWikipedia()">
+            🔍 Ask
+        </button>
+    </div>
+
+    <div id="answer"></div>
+
+</div>
+
+    </section>
+
+/* =====================================================
+   DARK MODE
+===================================================== */
+
+function toggleDark(){
+
+    document.body.classList.toggle("dark");
+
+}
+
+
+/* =====================================================
+   NOTIFICATION
+===================================================== */
+
+function notify(message){
+
+    const toast=
+    document.getElementById("toast");
+
+    toast.textContent=message;
+
+    toast.classList.add("show");
+
+
+    setTimeout(()=>{
+        toast.classList.remove("show");
+    },2500);
+
+}
+
+
+/* =====================================================
+   PREVIOUS YEAR PAPERS
+===================================================== */
+
+function openPYQ(){
+
+    window.open(
+        "https://testbook.com/previous-year-papers",
+        "_blank"
+    );
+
+}
+
+
+/* =====================================================
+   RENDER EVERYTHING
+===================================================== */
+
+function renderEverything(){
+
+    if(!user) return;
+
+
+    updateUser();
+
+    renderCourses();
+
+    renderMaterials();
+
+    renderVideos();
+
+    renderLinks();
+
+    renderRevision();
+
+    renderProgress();
+
+    renderContinue();
+
+    renderQuizStart();
+
+    document.getElementById("courseCount")
+    .textContent=courses.length;
+
+
+    document.getElementById("completedCount")
+    .textContent=
+    courses.filter(
+        c=>getCourseProgress(c.name)===100
+    ).length;
+
+
+    document.getElementById("quizCount")
+    .textContent=quizHistory.length;
+
+}
+
+
+/* =====================================================
+   STARTUP
+===================================================== */
+
+window.onload=function(){
+
+    const logged=
+    localStorage.getItem("tribalLoggedIn");
+
+
+    if(user && logged==="true"){
+
+        openApp();
+
+    }else{
+
+        document.getElementById("authPage")
+        .style.display="flex";
+
+        document.getElementById("app")
+        .style.display="none";
+
+    }
+
+};
+
+</script>
+
+</body>
+</html>

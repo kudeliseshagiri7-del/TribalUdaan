@@ -1,0 +1,3330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tribal Udaan - Student Learning Portal</title>
+
+<style>
+
+/* =========================
+   BASIC RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f4f8f5;
+    color:#123d35;
+}
+
+button,
+input{
+    font:inherit;
+}
+
+/* =========================
+   LAYOUT
+========================= */
+
+.app{
+    display:flex;
+    min-height:100vh;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+    width:250px;
+    background:#034f43;
+    color:white;
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    overflow-y:auto;
+    z-index:1000;
+}
+
+.logo{
+    padding:28px 25px;
+    border-bottom:1px solid rgba(255,255,255,.15);
+}
+
+.logo h1{
+    font-size:24px;
+    margin-bottom:5px;
+}
+
+.logo p{
+    font-size:13px;
+    line-height:1.5;
+    color:#d6eee7;
+}
+
+.menu-title{
+    font-size:12px;
+    color:#a8d2c7;
+    padding:25px 30px 10px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.menu-btn{
+    width:calc(100% - 20px);
+    margin:4px 10px;
+    padding:14px 18px;
+    border:none;
+    background:transparent;
+    color:white;
+    text-align:left;
+    border-radius:28px;
+    cursor:pointer;
+    font-size:15px;
+    transition:.25s;
+}
+
+.menu-btn:hover{
+    background:#08715e;
+}
+
+.menu-btn.active{
+    background:#18ae7c;
+}
+
+.menu-btn.logout{
+    color:#ffd1d1;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+    margin-left:250px;
+    width:calc(100% - 250px);
+}
+
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar{
+    height:75px;
+    background:white;
+    border-bottom:1px solid #e2e9e5;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 35px;
+    position:sticky;
+    top:0;
+    z-index:500;
+}
+
+.search-box{
+    width:450px;
+    background:#f5f8f7;
+    border:1px solid #e0e8e4;
+    border-radius:30px;
+    padding:14px 20px;
+    outline:none;
+}
+
+.top-right{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.top-icon{
+    cursor:pointer;
+    font-size:22px;
+}
+
+.profile-mini{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    cursor:pointer;
+}
+
+.avatar{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#078d70;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+/* =========================
+   PAGE
+========================= */
+
+.page{
+    display:none;
+    padding:35px;
+}
+
+.page.active{
+    display:block;
+}
+
+.page-title{
+    margin-bottom:25px;
+}
+
+.page-title h1{
+    font-size:32px;
+    margin-bottom:7px;
+}
+
+.page-title p{
+    color:#688078;
+}
+
+/* =========================
+   WELCOME
+========================= */
+
+.welcome{
+    background:linear-gradient(135deg,#075b4d,#079b76);
+    color:white;
+    padding:35px;
+    border-radius:20px;
+    margin-bottom:25px;
+}
+
+.welcome h1{
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+.welcome p{
+    opacity:.9;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn{
+    border:none;
+    border-radius:9px;
+    padding:13px 20px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.25s;
+    margin-top:15px;
+}
+
+.btn-primary{
+    background:#079b76;
+    color:white;
+}
+
+.btn-primary:hover{
+    background:#067d61;
+    transform:translateY(-2px);
+}
+
+.btn-secondary{
+    background:#edf4f1;
+    color:#075b4d;
+}
+
+.btn-danger{
+    background:#e74c3c;
+    color:white;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:25px;
+}
+
+.stat{
+    background:white;
+    padding:22px;
+    border-radius:15px;
+    border:1px solid #e1e9e5;
+}
+
+.stat-icon{
+    font-size:28px;
+}
+
+.stat h2{
+    margin:10px 0 5px;
+}
+
+.stat p{
+    color:#71827d;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border:1px solid #dfe8e4;
+    border-radius:16px;
+    padding:25px;
+    transition:.25s;
+}
+
+.card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 25px rgba(0,80,60,.08);
+}
+
+.card-icon{
+    font-size:35px;
+    margin-bottom:15px;
+}
+
+.card h2{
+    margin-bottom:10px;
+}
+
+.card p{
+    color:#71827d;
+    line-height:1.6;
+}
+
+/* =========================
+   PROGRESS
+========================= */
+
+.progress-box{
+    background:white;
+    border:1px solid #e1e9e5;
+    padding:25px;
+    border-radius:16px;
+}
+
+.progress-item{
+    margin:20px 0;
+}
+
+.progress-label{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:7px;
+}
+
+.progress-track{
+    height:9px;
+    background:#e6eee9;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    height:100%;
+    background:#0da77d;
+    border-radius:20px;
+}
+
+/* =========================
+   MATERIALS / RESOURCE CENTER
+========================= */
+
+.resource-header{
+    background:linear-gradient(135deg,#075b4d,#0a9674);
+    color:white;
+    padding:25px;
+    border-radius:18px;
+    margin-bottom:20px;
+}
+
+.resource-header h1{
+    margin-bottom:8px;
+}
+
+.resource-tools{
+    background:white;
+    padding:20px;
+    border-radius:16px;
+    border:1px solid #dfe8e4;
+}
+
+.resource-tabs{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+
+.resource-tab{
+    border:1px solid #dce6e1;
+    background:white;
+    padding:10px 15px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.resource-tab.active{
+    background:#079b76;
+    color:white;
+}
+
+.upload-row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:center;
+}
+
+.hidden-file{
+    display:none;
+}
+
+.file-button{
+    display:inline-block;
+    background:#079b76;
+    color:white;
+    padding:13px 18px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.youtube-row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:15px;
+}
+
+.youtube-row input{
+    flex:1;
+    min-width:220px;
+    padding:13px;
+    border:1px solid #dce6e1;
+    border-radius:9px;
+    outline:none;
+}
+
+.resource-list{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+    margin-top:20px;
+}
+
+.resource-item{
+    background:white;
+    border:1px solid #dfe8e4;
+    border-radius:15px;
+    padding:18px;
+}
+
+.resource-item h3{
+    word-break:break-word;
+    margin-bottom:5px;
+}
+
+.resource-item small{
+    color:#71827d;
+}
+
+.curated-resource{
+    border-left:4px solid #079b76;
+}
+
+.resource-note{
+    color:#71827d;
+    line-height:1.6;
+    margin-top:12px;
+}
+
+.resource-item video,
+.resource-item iframe,
+.resource-item img{
+    width:100%;
+    max-height:300px;
+    margin-top:12px;
+    border-radius:10px;
+    background:#111;
+}
+
+.resource-actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:12px;
+}
+
+.resource-actions a{
+    text-decoration:none;
+}
+
+.empty{
+    grid-column:1/-1;
+    text-align:center;
+    padding:40px;
+    border:2px dashed #dce6e1;
+    border-radius:15px;
+    color:#71827d;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.study-search{
+    background:white;
+    padding:25px;
+    border-radius:16px;
+    border:1px solid #dfe8e4;
+}
+
+.study-search input{
+    width:100%;
+    padding:14px;
+    border:1px solid #dce6e1;
+    border-radius:9px;
+    outline:none;
+}
+
+.search-result{
+    margin-top:20px;
+    padding:20px;
+    background:#f7faf8;
+    border-radius:12px;
+    line-height:1.7;
+}
+
+.search-result a{
+    color:#087d63;
+    font-weight:bold;
+}
+
+/* =========================
+   AI STUDY MENTOR
+========================= */
+
+.mentor-panel{
+    max-width:850px;
+}
+
+.mentor-panel textarea{
+    width:100%;
+    min-height:120px;
+    resize:vertical;
+    padding:14px;
+    border:1px solid #dce6e1;
+    border-radius:9px;
+    outline:none;
+}
+
+.mentor-answer{
+    margin-top:18px;
+    padding:18px;
+    background:#f7faf8;
+    border-radius:12px;
+    line-height:1.7;
+    white-space:pre-wrap;
+}
+
+.mentor-status{
+    min-height:1.5em;
+    margin-top:10px;
+    color:#71827d;
+}
+
+/* =========================
+   VIDEO PAGE
+========================= */
+
+.video-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.video-card{
+    background:white;
+    border:1px solid #dfe8e4;
+    padding:18px;
+    border-radius:15px;
+}
+
+.video-card iframe{
+    width:100%;
+    aspect-ratio:16/9;
+    border:none;
+    border-radius:10px;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#075b4d;
+    color:white;
+    padding:15px 20px;
+    border-radius:10px;
+    display:none;
+    z-index:5000;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1000px){
+
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .resource-list,
+    .video-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:750px){
+
+    .sidebar{
+        width:220px;
+    }
+
+    .main{
+        margin-left:220px;
+        width:calc(100% - 220px);
+    }
+
+    .topbar{
+        padding:0 15px;
+    }
+
+    .search-box{
+        width:250px;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:600px){
+
+    .sidebar{
+        position:relative;
+        width:100%;
+        min-height:auto;
+    }
+
+    .main{
+        margin-left:0;
+        width:100%;
+    }
+
+    .app{
+        display:block;
+    }
+
+    .topbar{
+        position:relative;
+        height:auto;
+        padding:15px;
+        gap:10px;
+        flex-wrap:wrap;
+    }
+
+    .search-box{
+        width:100%;
+    }
+
+    .page{
+        padding:20px;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        <h1>🌿 Tribal Uddan</h1>
+        <p>Learn | Prepare | Build<br>Your Future</p>
+    </div>
+
+    <div class="menu-title">Main</div>
+
+    <button class="menu-btn active"
+            onclick="showPage('home',this)">
+        🏠 Home
+    </button>
+
+    <div class="menu-title">Learning</div>
+
+    <button class="menu-btn"
+            onclick="showPage('learn',this)">
+        📚 Learn
+    </button>
+
+    <button class="menu-btn"
+            onclick="showPage('practice',this)">
+        📝 Practice
+    </button>
+
+    <button class="menu-btn"
+            onclick="showPage('career',this)">
+        🎯 Career
+    </button>
+
+    <button class="menu-btn"
+            onclick="showPage('studyMentor',this)">
+        🤖 AI Study Mentor
+    </button>
+
+    <div class="menu-title">My Journey</div>
+
+    <button class="menu-btn"
+            onclick="showPage('progress',this)">
+        📊 My Progress
+    </button>
+
+    <button class="menu-btn"
+            onclick="showPage('materials',this)">
+        📁 Materials
+    </button>
+
+    <button class="menu-btn"
+            onclick="showPage('studySearch',this)">
+        🔎 Study Search
+    </button>
+
+    <button class="menu-btn"
+            onclick="showPage('videos',this)">
+        🎥 Reference Classes
+    </button>
+
+    <button class="menu-btn"
+            onclick="showPage('certificates',this)">
+        🏆 Certificates
+    </button>
+
+    <div class="menu-title">Account</div>
+
+    <button class="menu-btn"
+            onclick="showPage('profile',this)">
+        👤 Profile
+    </button>
+
+    <button class="menu-btn"
+            onclick="showPage('notifications',this)">
+        🔔 Notifications
+    </button>
+
+    <button class="menu-btn"
+            onclick="toggleDarkMode()">
+        🌙 Dark Mode
+    </button>
+
+    <button class="menu-btn"
+            onclick="logout()">
+        🚪 Logout
+    </button>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+<!-- TOP BAR -->
+
+<header class="topbar">
+
+    <input
+        class="search-box"
+        id="globalSearch"
+        placeholder="🔍 Search courses, exams, or anything..."
+        onkeyup="globalSearch()"
+    >
+
+    <div class="top-right">
+
+        <span class="top-icon"
+              onclick="showPage('notifications')">
+            🔔
+        </span>
+
+        <span class="top-icon"
+              onclick="toggleDarkMode()">
+            🌙
+        </span>
+
+        <div class="profile-mini"
+             onclick="showPage('profile')">
+
+            <div class="avatar" id="topAvatar">S</div>
+
+            <div>
+                <b id="topName">Sneha</b><br>
+                <small>Student</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     HOME
+===================================================== -->
+
+<section class="page active" id="home">
+
+    <div class="welcome">
+
+        <h1>
+            Welcome back, <span id="welcomeName">Sneha</span> 👋
+        </h1>
+
+        <p>
+            Continue your learning journey and build your future.
+        </p>
+
+        <button class="btn btn-primary"
+                onclick="showPage('learn')">
+            Continue Learning →
+        </button>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+            <div class="stat-icon">📚</div>
+            <h2>06</h2>
+            <p>Courses Enrolled</p>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">📝</div>
+            <h2>18</h2>
+            <p>Tests Completed</p>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">🏅</div>
+            <h2>07</h2>
+            <p>Badges Earned</p>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">🏆</div>
+            <h2>02</h2>
+            <p>Certificates</p>
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>🎯 APPSC Group 2 Preparation</h2>
+
+        <p>
+            Your current preparation progress.
+        </p>
+
+        <div class="progress-item">
+
+            <div class="progress-label">
+                <span>Preparation</span>
+                <b>42%</b>
+            </div>
+
+            <div class="progress-track">
+                <div class="progress-fill"
+                     style="width:42%">
+                </div>
+            </div>
+
+        </div>
+
+        <button class="btn btn-primary"
+                onclick="openResource('exams')">
+            Continue Preparation
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     LEARN
+===================================================== -->
+
+<section class="page" id="learn">
+
+    <div class="page-title">
+
+        <h1>📚 Learn</h1>
+
+        <p>
+            Explore subjects, competitive exams and skill courses.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+        <div class="card">
+
+            <div class="card-icon">📖</div>
+
+            <h2>School Subjects</h2>
+
+            <p>
+                Learn school subjects through structured lessons,
+                activities and practice.
+            </p>
+
+            <button class="btn btn-primary"
+                    onclick="openResource('subjects')">
+                Explore Subjects
+            </button>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">🏛️</div>
+
+            <h2>Competitive Exams</h2>
+
+            <p>
+                Prepare for APPSC and other government
+                competitive examinations.
+            </p>
+
+            <button class="btn btn-primary"
+                    onclick="openResource('exams')">
+                Start Preparation
+            </button>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">📰</div>
+
+            <h2>Current Affairs</h2>
+
+            <p>
+                Improve awareness with regularly updated
+                current-affairs practice.
+            </p>
+
+            <button class="btn btn-primary"
+                    onclick="openResource('current')">
+                Practice Now
+            </button>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">💻</div>
+
+            <h2>Skill Courses</h2>
+
+            <p>
+                Build digital and career-ready skills for
+                future opportunities.
+            </p>
+
+            <button class="btn btn-primary"
+                    onclick="openResource('skills')">
+                View Skills
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <div class="card-icon">🤖</div>
+
+            <h2>AI Study Mentor</h2>
+
+            <p>
+                Ask questions about exam subjects, syllabus topics,
+                quizzes and revision.
+            </p>
+
+            <button class="btn btn-primary"
+                    onclick="showPage('studyMentor')">
+                Ask the Mentor
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PRACTICE
+===================================================== -->
+
+<section class="page" id="practice">
+
+    <div class="page-title">
+
+        <h1>📝 Practice</h1>
+
+        <p>
+            Test your knowledge and improve your preparation.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+        <div class="card">
+
+            <div class="card-icon">🎯</div>
+
+            <h2>Daily Quiz</h2>
+
+            <p>
+                Practice a short set of questions every day.
+            </p>
+
+            <button class="btn btn-primary"
+                    onclick="openResource('quiz')">
+                Start Quiz
+            </button>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">📝</div>
+
+            <h2>Mock Tests</h2>
+
+            <p>
+                Take full-length mock tests and check
+                your performance.
+            </p>
+
+            <button class="btn btn-primary"
+                    onclick="openResource('mock')">
+                Start Mock Test
+            </button>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">📄</div>
+
+            <h2>Previous Year Questions</h2>
+
+            <p>
+                Practice questions from previous examinations.
+            </p>
+
+            <button class="btn btn-primary"
+                    onclick="openResource('pyq')">
+                Practice Questions
+            </button>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">🔥</div>
+
+            <h2>Daily Challenge</h2>
+
+            <p>
+                Complete today's challenge and maintain
+                your learning streak.
+            </p>
+
+            <button class="btn btn-primary"
+                    onclick="openResource('challenge')">
+                Accept Challenge
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CAREER
+===================================================== -->
+
+<section class="page" id="career">
+
+    <div class="page-title">
+
+        <h1>🎯 Career</h1>
+
+        <p>
+            Discover opportunities and plan your future.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+        <div class="card">
+
+            <div class="card-icon">🧭</div>
+
+            <h2>Career Explorer</h2>
+
+            <p>
+                Explore different career paths according
+                to your interests and skills.
+            </p>
+
+            <button class="btn btn-primary"
+                    onclick="openResource('careers')">
+                Explore Careers
+            </button>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">🔎</div>
+
+            <h2>Exam Finder</h2>
+
+            <p>
+                Find competitive examinations and understand
+                their preparation requirements.
+            </p>
+
+            <button class="btn btn-primary"
+                    onclick="openResource('examfinder')">
+                Find Exams
+            </button>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">🎓</div>
+
+            <h2>Scholarships</h2>
+
+            <p>
+                Explore scholarship opportunities that
+                can support your education.
+            </p>
+
+            <button class="btn btn-primary"
+                    onclick="openResource('scholarships')">
+                Find Scholarships
+            </button>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">💼</div>
+
+            <h2>Opportunities</h2>
+
+            <p>
+                Discover education, training and
+                career opportunities.
+            </p>
+
+            <button class="btn btn-primary"
+                    onclick="openResource('opportunities')">
+                Explore
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     AI STUDY MENTOR
+===================================================== -->
+
+<section class="page" id="studyMentor">
+
+    <div class="page-title">
+
+        <h1>🤖 AI Study Mentor</h1>
+
+        <p>
+            Ask about competitive-exam subjects, syllabus topics,
+            quiz questions, revision or general study doubts.
+        </p>
+
+    </div>
+
+    <div class="card mentor-panel">
+
+        <label for="mentorQuestion"><b>Your study question</b></label>
+        <br><br>
+
+        <textarea
+            id="mentorQuestion"
+            maxlength="1200"
+            placeholder="Example: What are Fundamental Rights? Explain them simply."
+            onkeydown="if(event.key==='Enter' && !event.shiftKey){event.preventDefault(); askStudyMentor();}">
+        </textarea>
+
+        <br><br>
+
+        <button class="btn btn-primary"
+                id="mentorSubmit"
+                onclick="askStudyMentor()">
+            Ask Mentor
+        </button>
+
+        <p class="mentor-status" id="mentorStatus" role="status" aria-live="polite">
+            Your question is sent to the secure server-side mentor endpoint.
+        </p>
+
+        <div class="mentor-answer" id="mentorAnswer" hidden></div>
+
+        <p class="resource-note">
+            The API key belongs in the server environment, never in this page.
+            Configure <code>OPENAI_API_KEY</code> when deploying the included
+            serverless endpoint.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PROGRESS
+===================================================== -->
+
+<section class="page" id="progress">
+
+    <div class="page-title">
+
+        <h1>📊 My Progress</h1>
+
+        <p>
+            Track your learning journey and achievements.
+        </p>
+
+    </div>
+
+
+    <div class="progress-box">
+
+        <h2>Subject Performance</h2>
+
+        <div class="progress-item">
+
+            <div class="progress-label">
+                <span>📘 Polity</span>
+                <b>80%</b>
+            </div>
+
+            <div class="progress-track">
+                <div class="progress-fill"
+                     style="width:80%">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="progress-item">
+
+            <div class="progress-label">
+                <span>📕 History</span>
+                <b>60%</b>
+            </div>
+
+            <div class="progress-track">
+                <div class="progress-fill"
+                     style="width:60%">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="progress-item">
+
+            <div class="progress-label">
+                <span>🌍 Geography</span>
+                <b>70%</b>
+            </div>
+
+            <div class="progress-track">
+                <div class="progress-fill"
+                     style="width:70%">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="progress-item">
+
+            <div class="progress-label">
+                <span>🧮 Aptitude</span>
+                <b>90%</b>
+            </div>
+
+            <div class="progress-track">
+                <div class="progress-fill"
+                     style="width:90%">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+
+    <div class="grid">
+
+        <div class="card">
+
+            <div class="card-icon">📈</div>
+
+            <h2>Learning Progress</h2>
+
+            <p>
+                42% of your current preparation goal is complete.
+            </p>
+
+            <button class="btn btn-primary"
+                    onclick="openResource('progress')">
+                View Progress Resources
+            </button>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">🏆</div>
+
+            <h2>Achievements</h2>
+
+            <p>
+                You have earned 7 learning badges.
+            </p>
+
+            <button class="btn btn-primary"
+                    onclick="openResource('achievements')">
+                View Achievements
+            </button>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">🎫</div>
+
+            <h2>Career Passport</h2>
+
+            <p>
+                Build your learning and achievement profile.
+            </p>
+
+            <button class="btn btn-primary"
+                    onclick="openResource('passport')">
+                Open Career Passport
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MATERIALS
+===================================================== -->
+
+<section class="page" id="materials">
+
+    <div class="page-title">
+
+        <h1>📁 Materials</h1>
+
+        <p>
+            Access and manage your study resources.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+        <div class="card">
+
+            <div class="card-icon">📕</div>
+
+            <h2>Study Notes</h2>
+
+            <p>
+                Subject-wise notes for your preparation.
+            </p>
+
+            <button class="btn btn-primary"
+                    onclick="openResource('notes')">
+                Open Notes
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <div class="card-icon">📚</div>
+
+            <h2>Study Materials</h2>
+
+            <p>
+                Open the Polity, Quantitative Aptitude, Computer Basics
+                and General Studies resources.
+            </p>
+
+            <button class="btn btn-primary"
+                    onclick="openResource('studyMaterials')">
+                Browse Study Materials
+            </button>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">📄</div>
+
+            <h2>Previous Papers</h2>
+
+            <p>
+                Practice previous examination papers.
+            </p>
+
+            <button class="btn btn-primary"
+                    onclick="openResource('papers')">
+                Open Papers
+            </button>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">🎥</div>
+
+            <h2>Video Lessons</h2>
+
+            <p>
+                Learn through visual lessons and explanations.
+            </p>
+
+            <button class="btn btn-primary"
+                    onclick="openResource('videos')">
+                Watch Lessons
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <div class="card-icon">📚</div>
+
+            <h2>Course Materials</h2>
+
+            <p>
+                Open the provided subject resources or add your own
+                PDFs and notes for this browser.
+            </p>
+
+            <button class="btn btn-primary"
+                    onclick="openResource('coursematerials')">
+                Open Course Materials
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <div class="card-icon">🔗</div>
+
+            <h2>Online Study Links</h2>
+
+            <p>
+                Visit the selected preparation, current-affairs and
+                computer-basics resources.
+            </p>
+
+            <button class="btn btn-primary"
+                    onclick="openResource('online')">
+                Browse Study Links
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     RESOURCE CENTER
+===================================================== -->
+
+<section class="page" id="resourceCenter">
+
+    <div class="resource-header">
+
+        <h1 id="resourceTitle">
+            Resource Center
+        </h1>
+
+        <p id="resourceDescription">
+            Add your study materials and reference classes here.
+        </p>
+
+        <p class="resource-note">
+            Your uploaded files are stored in this browser. Curated links open
+            their external resource in a new tab.
+        </p>
+
+    </div>
+
+
+    <div class="resource-tools">
+
+        <div class="resource-tabs" id="resourceTabs">
+        </div>
+
+
+        <!-- FILE UPLOAD -->
+
+        <div class="upload-row">
+
+            <label class="file-button">
+
+                📁 Add Study Files
+
+                <input
+                    class="hidden-file"
+                    type="file"
+                    id="studyFiles"
+                    multiple
+                    accept=".pdf,.doc,.docx,.ppt,.pptx,.txt,.jpg,.jpeg,.png,.webp"
+                    onchange="addStudyFiles(event)"
+                >
+
+            </label>
+
+
+            <!-- VIDEO UPLOAD -->
+
+            <label class="file-button">
+
+                🎥 Add Video
+
+                <input
+                    class="hidden-file"
+                    type="file"
+                    id="videoFiles"
+                    multiple
+                    accept="video/*"
+                    onchange="addVideos(event)"
+                >
+
+            </label>
+
+
+            <button class="btn btn-secondary"
+                    onclick="clearCurrentResources()">
+                🗑 Clear Section
+            </button>
+
+        </div>
+
+
+        <!-- YOUTUBE -->
+
+        <div class="youtube-row">
+
+            <input
+                id="youtubeTitle"
+                placeholder="Video title"
+            >
+
+            <input
+                id="youtubeURL"
+                placeholder="Paste YouTube URL"
+            >
+
+            <button class="btn btn-primary"
+                    onclick="addYouTube()">
+                ▶ Add YouTube Class
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="resource-list"
+         id="resourceList">
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     STUDY SEARCH
+===================================================== -->
+
+<section class="page" id="studySearch">
+
+    <div class="page-title">
+
+        <h1>🔎 Study Search</h1>
+
+        <p>
+            Search Wikipedia for study information and reference articles.
+        </p>
+
+    </div>
+
+
+    <div class="study-search">
+
+        <input
+            id="wikiQuestion"
+            placeholder="Example: What is photosynthesis?"
+            onkeydown="if(event.key==='Enter') searchWikipedia()"
+        >
+
+        <button class="btn btn-primary"
+                onclick="searchWikipedia()">
+            🔍 Search
+        </button>
+
+
+        <div id="wikiResult">
+
+            <div class="search-result">
+                Type a topic or question above.
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     REFERENCE CLASSES
+===================================================== -->
+
+<section class="page" id="videos">
+
+    <div class="page-title">
+
+        <h1>🎥 Reference Classes</h1>
+
+        <p>
+            Watch reference classes and add your own videos.
+        </p>
+
+    </div>
+
+
+    <div class="video-grid">
+
+        <div class="video-card">
+
+            <h2>JavaScript Basics</h2>
+
+            <br>
+
+            <iframe
+                src="https://www.youtube.com/embed/PkZNo7MFNFg"
+                allowfullscreen>
+            </iframe>
+
+        </div>
+
+
+        <div class="video-card">
+
+            <h2>HTML & CSS Basics</h2>
+
+            <br>
+
+            <iframe
+                src="https://www.youtube.com/embed/G3e-cpL7ofc"
+                allowfullscreen>
+            </iframe>
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+    <button class="btn btn-primary"
+            onclick="openResource('videos')">
+        ➕ Manage My Videos
+    </button>
+
+</section>
+
+
+<!-- =====================================================
+     CERTIFICATES
+===================================================== -->
+
+<section class="page" id="certificates">
+
+    <div class="page-title">
+
+        <h1>🏆 Certificates</h1>
+
+        <p>
+            View your earned certificates.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+        <div class="card">
+
+            <div class="card-icon">📜</div>
+
+            <h2>Computer Basics</h2>
+
+            <p>
+                Successfully completed the Computer Basics course.
+            </p>
+
+            <button class="btn btn-primary"
+                    onclick="openResource('certificate')">
+                View Certificate
+            </button>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">🏅</div>
+
+            <h2>General Studies</h2>
+
+            <p>
+                Successfully completed the General Studies assessment.
+            </p>
+
+            <button class="btn btn-primary"
+                    onclick="openResource('certificate')">
+                View Certificate
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PROFILE
+===================================================== -->
+
+<section class="page" id="profile">
+
+    <div class="page-title">
+
+        <h1>👤 Profile</h1>
+
+        <p>
+            Manage your student profile.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>Student Profile</h2>
+
+        <br>
+
+        <p><b>Name:</b> Sneha</p>
+        <p><b>Role:</b> Student</p>
+        <p><b>Target Exam:</b> APPSC Group 2</p>
+        <p><b>Learning Status:</b> Active</p>
+
+        <button class="btn btn-primary"
+                onclick="showToast('Profile editing will be available here.')">
+            Edit Profile
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     NOTIFICATIONS
+===================================================== -->
+
+<section class="page" id="notifications">
+
+    <div class="page-title">
+
+        <h1>🔔 Notifications</h1>
+
+        <p>
+            Your latest learning notifications.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>📚 New Study Material</h2>
+
+        <p>
+            New preparation resources can be added to your
+            Resource Center.
+        </p>
+
+    </div>
+
+    <br>
+
+    <div class="card">
+
+        <h2>🎯 Daily Challenge</h2>
+
+        <p>
+            Your daily learning challenge is ready.
+        </p>
+
+    </div>
+
+</section>
+
+
+</main>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* =====================================================
+   PAGE NAVIGATION
+===================================================== */
+
+function showPage(pageId, button){
+
+    document.querySelectorAll(".page").forEach(function(page){
+
+        page.classList.remove("active");
+
+    });
+
+
+    const page = document.getElementById(pageId);
+
+    if(page){
+        page.classList.add("active");
+    }
+
+
+    document.querySelectorAll(".menu-btn").forEach(function(btn){
+
+        btn.classList.remove("active");
+
+    });
+
+
+    if(button){
+        button.classList.add("active");
+    }
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(message){
+
+    const toast = document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.style.display = "block";
+
+
+    setTimeout(function(){
+
+        toast.style.display = "none";
+
+    },2500);
+
+}
+
+
+/* =====================================================
+   RESOURCE CATEGORIES
+===================================================== */
+
+const resourceCategories = {
+
+    subjects:{
+        title:"📖 School Subjects",
+        description:"Add school subject notes, worksheets and classes."
+    },
+
+    exams:{
+        title:"🎯 Competitive Exams",
+        description:"Add exam syllabi, preparation PDFs and classes."
+    },
+
+    current:{
+        title:"📰 Current Affairs",
+        description:"Add current-affairs notes and reference material."
+    },
+
+    skills:{
+        title:"💻 Skill Courses",
+        description:"Add coding notes, tutorials and project resources."
+    },
+
+    quiz:{
+        title:"🎯 Daily Quiz",
+        description:"Add quiz questions, answer keys and explanations."
+    },
+
+    mock:{
+        title:"📝 Mock Tests",
+        description:"Add full-length mock tests and solutions."
+    },
+
+    pyq:{
+        title:"📄 Previous Year Questions",
+        description:"Add previous-year papers and solution classes."
+    },
+
+    challenge:{
+        title:"🔥 Daily Challenge",
+        description:"Add daily challenge sheets and videos."
+    },
+
+    careers:{
+        title:"🧭 Career Explorer",
+        description:"Add career guides and career information."
+    },
+
+    examfinder:{
+        title:"🔎 Exam Finder",
+        description:"Add exam syllabi and preparation resources."
+    },
+
+    scholarships:{
+        title:"🎓 Scholarships",
+        description:"Add scholarship notices and eligibility documents."
+    },
+
+    opportunities:{
+        title:"💼 Opportunities",
+        description:"Add education, training and career opportunities."
+    },
+
+    progress:{
+        title:"📊 Learning Progress",
+        description:"Add progress-related resources."
+    },
+
+    achievements:{
+        title:"🏆 Achievements",
+        description:"Store achievement evidence and badge resources."
+    },
+
+    passport:{
+        title:"🎫 Career Passport",
+        description:"Store career profile and achievement resources."
+    },
+
+    notes:{
+        title:"📕 Study Notes",
+        description:"Add subject-wise study notes."
+    },
+
+    papers:{
+        title:"📄 Previous Papers",
+        description:"Add previous examination papers."
+    },
+
+    videos:{
+        title:"🎥 Video Lessons",
+        description:"Add local videos and YouTube reference classes."
+    },
+
+    studyMaterials:{
+        title:"📚 Study Materials",
+        description:"Open the Polity, Quantitative Aptitude, Computer Basics and General Studies resources."
+    },
+
+    coursematerials:{
+        title:"🎓 Course Materials",
+        description:"Use the course resources below or upload your own PDFs and notes for this browser."
+    },
+
+    online:{
+        title:"🔗 Online Study Links",
+        description:"Visit APPSC preparation, computer-basics and current-affairs resources."
+    },
+
+    certificate:{
+        title:"🏅 Certificates",
+        description:"Add certificate files and supporting documents."
+    }
+
+};
+
+const curatedResources = {
+    exams:[
+        {name:"APPSC — official examinations and notifications",url:"https://psc.ap.gov.in/"},
+        {name:"KP IAS Academy — APPSC Group 1 preparation",url:"https://www.google.com/search?q=KP+IAS+Academy+APPSC+Group+1"}
+    ],
+    examfinder:[
+        {name:"APPSC — official exam information",url:"https://psc.ap.gov.in/"},
+        {name:"KP IAS Academy — APPSC preparation",url:"https://www.google.com/search?q=KP+IAS+Academy+APPSC+preparation"}
+    ],
+    studyMaterials:[
+        {name:"Vision IAS — Indian Polity study material",url:"https://visionias.in/resources/"},
+        {name:"Find YCMOU Quantitative Aptitude material",url:"https://www.google.com/search?q=YCMOU+Quantitative+Aptitude+PDF"},
+        {name:"Find VFU Computer Basics material",url:"https://www.google.com/search?q=VFU+Computer+Basics+PDF"},
+        {name:"CBSE Academic — General Studies and academic resources",url:"https://cbseacademic.nic.in/"}
+    ],
+    notes:[
+        {name:"Indian Polity — Vision IAS resources",url:"https://visionias.in/resources/"},
+        {name:"Find YCMOU Quantitative Aptitude material",url:"https://www.google.com/search?q=YCMOU+Quantitative+Aptitude+PDF"},
+        {name:"Find VFU Computer Basics material",url:"https://www.google.com/search?q=VFU+Computer+Basics+PDF"},
+        {name:"General Studies — CBSE Academic",url:"https://cbseacademic.nic.in/"}
+    ],
+    coursematerials:[
+        {name:"Indian Polity — Vision IAS resources",url:"https://visionias.in/resources/"},
+        {name:"Find YCMOU Quantitative Aptitude PDF",url:"https://www.google.com/search?q=YCMOU+Quantitative+Aptitude+PDF"},
+        {name:"Find VFU Computer Basics PDF",url:"https://www.google.com/search?q=VFU+Computer+Basics+PDF"},
+        {name:"General Studies resources — CBSE Academic",url:"https://cbseacademic.nic.in/"}
+    ],
+    videos:[
+        {name:"Find YouTube classes: APPSC Group 1 preparation",url:"https://www.youtube.com/results?search_query=APPSC+Group+1+classes"},
+        {name:"Find YouTube classes: Indian Polity and Fundamental Rights",url:"https://www.youtube.com/results?search_query=Indian+Polity+Fundamental+Rights+class"},
+        {name:"Find YouTube classes: Quantitative Aptitude",url:"https://www.youtube.com/results?search_query=Quantitative+Aptitude+class"}
+    ],
+    online:[
+        {name:"KP IAS Academy — APPSC Group 1",url:"https://www.google.com/search?q=KP+IAS+Academy+APPSC+Group+1"},
+        {name:"Find GeeksforGeeks Computer Basics",url:"https://www.google.com/search?q=site%3Ageeksforgeeks.org+computer+basics"},
+        {name:"Abhyas IAS — Current Affairs",url:"https://www.google.com/search?q=Abhyas+IAS+Current+Affairs"}
+    ],
+    current:[
+        {name:"Abhyas IAS — Current Affairs",url:"https://www.google.com/search?q=Abhyas+IAS+Current+Affairs"}
+    ],
+    skills:[
+        {name:"Find GeeksforGeeks Computer Basics",url:"https://www.google.com/search?q=site%3Ageeksforgeeks.org+computer+basics"}
+    ],
+    quiz:[
+        {name:"CareerRide — Aptitude practice",url:"https://www.careerride.com/online-aptitude-test.aspx"}
+    ],
+    mock:[
+        {name:"CareerRide — Online aptitude tests",url:"https://www.careerride.com/online-aptitude-test.aspx"}
+    ],
+    pyq:[
+        {name:"Testbook — Previous Year Question Papers",url:"https://testbook.com/previous-year-papers"}
+    ],
+    papers:[
+        {name:"Testbook — Previous Year Question Papers",url:"https://testbook.com/previous-year-papers"}
+    ],
+    challenge:[
+        {name:"Abhyas IAS — Current Affairs challenge",url:"https://www.google.com/search?q=Abhyas+IAS+Current+Affairs"},
+        {name:"CareerRide — Aptitude practice challenge",url:"https://www.careerride.com/online-aptitude-test.aspx"}
+    ]
+};
+
+
+let currentCategory = "general";
+
+
+/* =====================================================
+   OPEN RESOURCE CENTER
+===================================================== */
+
+function openResource(category){
+
+    currentCategory = category;
+
+
+    document.getElementById("resourceCenter")
+        .classList.add("active");
+
+
+    document.querySelectorAll(".page").forEach(function(page){
+
+        if(page.id !== "resourceCenter"){
+            page.classList.remove("active");
+        }
+
+    });
+
+
+    const data =
+        resourceCategories[category] ||
+        {
+            title:"📚 Resource Center",
+            description:"Add your study resources here."
+        };
+
+
+    document.getElementById("resourceTitle")
+        .textContent = data.title + " Resource Center";
+
+
+    document.getElementById("resourceDescription")
+        .textContent = data.description;
+
+
+    renderTabs();
+
+    renderResources();
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =====================================================
+   RESOURCE TABS
+===================================================== */
+
+function renderTabs(){
+
+    const container =
+        document.getElementById("resourceTabs");
+
+    container.innerHTML = "";
+
+
+    Object.keys(resourceCategories).forEach(function(key){
+
+        const button =
+            document.createElement("button");
+
+
+        button.className =
+            "resource-tab";
+
+
+        if(key === currentCategory){
+            button.classList.add("active");
+        }
+
+
+        button.textContent =
+            resourceCategories[key].title;
+
+
+        button.onclick = function(){
+
+            openResource(key);
+
+        };
+
+
+        container.appendChild(button);
+
+    });
+
+}
+
+
+/* =====================================================
+   INDEXED DB
+   Used to store uploaded files/videos
+===================================================== */
+
+const DB_NAME = "TribalUddanResources";
+
+const STORE_NAME = "resources";
+
+
+function openDatabase(){
+
+    return new Promise(function(resolve,reject){
+
+        const request =
+            indexedDB.open(DB_NAME,1);
+
+
+        request.onupgradeneeded =
+            function(event){
+
+                const db =
+                    event.target.result;
+
+
+                if(!db.objectStoreNames.contains(STORE_NAME)){
+
+                    db.createObjectStore(
+                        STORE_NAME,
+                        {
+                            keyPath:"id",
+                            autoIncrement:true
+                        }
+                    );
+
+                }
+
+            };
+
+
+        request.onsuccess =
+            function(event){
+
+                resolve(event.target.result);
+
+            };
+
+
+        request.onerror =
+            function(){
+
+                reject(request.error);
+
+            };
+
+    });
+
+}
+
+
+/* =====================================================
+   ADD DATABASE ITEM
+===================================================== */
+
+function addToDatabase(item){
+
+    return openDatabase().then(function(db){
+
+        return new Promise(function(resolve,reject){
+
+            const transaction =
+                db.transaction(
+                    STORE_NAME,
+                    "readwrite"
+                );
+
+
+            const store =
+                transaction.objectStore(STORE_NAME);
+
+
+            store.add(item);
+
+
+            transaction.oncomplete =
+                function(){
+
+                    resolve();
+
+                };
+
+
+            transaction.onerror =
+                function(){
+
+                    reject(transaction.error);
+
+                };
+
+        });
+
+    });
+
+}
+
+
+/* =====================================================
+   GET DATABASE ITEMS
+===================================================== */
+
+function getResources(){
+
+    return openDatabase().then(function(db){
+
+        return new Promise(function(resolve,reject){
+
+            const transaction =
+                db.transaction(
+                    STORE_NAME,
+                    "readonly"
+                );
+
+
+            const store =
+                transaction.objectStore(STORE_NAME);
+
+
+            const request =
+                store.getAll();
+
+
+            request.onsuccess =
+                function(){
+
+                    resolve(request.result);
+
+                };
+
+
+            request.onerror =
+                function(){
+
+                    reject(request.error);
+
+                };
+
+        });
+
+    });
+
+}
+
+
+/* =====================================================
+   DELETE RESOURCE
+===================================================== */
+
+function deleteResource(id){
+
+    return openDatabase().then(function(db){
+
+        return new Promise(function(resolve,reject){
+
+            const transaction =
+                db.transaction(
+                    STORE_NAME,
+                    "readwrite"
+                );
+
+
+            transaction.objectStore(STORE_NAME)
+                .delete(id);
+
+
+            transaction.oncomplete =
+                function(){
+
+                    resolve();
+
+                };
+
+
+            transaction.onerror =
+                function(){
+
+                    reject(transaction.error);
+
+                };
+
+        });
+
+    });
+
+}
+
+
+/* =====================================================
+   ADD STUDY FILES
+===================================================== */
+
+async function addStudyFiles(event){
+
+    const files =
+        Array.from(event.target.files);
+
+
+    if(files.length === 0){
+        return;
+    }
+
+
+    for(const file of files){
+
+        const data =
+            await readFile(file);
+
+
+        await addToDatabase({
+
+            category:currentCategory,
+
+            type:"file",
+
+            name:file.name,
+
+            mime:file.type,
+
+            size:file.size,
+
+            data:data,
+
+            created:Date.now()
+
+        });
+
+    }
+
+
+    event.target.value = "";
+
+
+    showToast(
+        files.length +
+        " study file(s) added successfully!"
+    );
+
+
+    renderResources();
+
+}
+
+
+/* =====================================================
+   ADD VIDEOS
+===================================================== */
+
+async function addVideos(event){
+
+    const files =
+        Array.from(event.target.files);
+
+
+    if(files.length === 0){
+        return;
+    }
+
+
+    for(const file of files){
+
+        const data =
+            await readFile(file);
+
+
+        await addToDatabase({
+
+            category:currentCategory,
+
+            type:"video",
+
+            name:file.name,
+
+            mime:file.type,
+
+            size:file.size,
+
+            data:data,
+
+            created:Date.now()
+
+        });
+
+    }
+
+
+    event.target.value = "";
+
+
+    showToast(
+        files.length +
+        " video(s) added successfully!"
+    );
+
+
+    renderResources();
+
+}
+
+
+/* =====================================================
+   READ FILE
+===================================================== */
+
+function readFile(file){
+
+    return new Promise(function(resolve,reject){
+
+        const reader =
+            new FileReader();
+
+
+        reader.onload =
+            function(){
+
+                resolve(reader.result);
+
+            };
+
+
+        reader.onerror =
+            function(){
+
+                reject(reader.error);
+
+            };
+
+
+        reader.readAsDataURL(file);
+
+    });
+
+}
+
+
+/* =====================================================
+   STUDY MENTOR
+===================================================== */
+
+async function askStudyMentor(){
+
+    const question =
+        document.getElementById("mentorQuestion")
+            .value.trim();
+
+    const submitButton =
+        document.getElementById("mentorSubmit");
+
+    const status =
+        document.getElementById("mentorStatus");
+
+    const answer =
+        document.getElementById("mentorAnswer");
+
+    if(question === ""){
+        status.textContent = "Enter a study question first.";
+        answer.hidden = true;
+        return;
+    }
+
+    submitButton.disabled = true;
+    status.textContent = "The mentor is preparing an answer...";
+    answer.hidden = true;
+
+    try{
+        const response = await fetch("/api/study-mentor", {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({question:question})
+        });
+
+        let result;
+        try{
+            result = await response.json();
+        }
+        catch{
+            throw new Error(
+                `The mentor endpoint returned an unreadable response (HTTP ${response.status}). Deploy the page with the included serverless endpoint.`
+            );
+        }
+
+        if(!response.ok){
+            throw new Error(
+                result.error ||
+                "The study mentor request failed."
+            );
+        }
+
+        if(typeof result.answer !== "string" ||
+           result.answer.trim() === ""){
+            throw new Error("The mentor returned an empty answer.");
+        }
+
+        answer.textContent = result.answer;
+        answer.hidden = false;
+        status.textContent = "Answer from your AI Study Mentor.";
+    }
+    catch(error){
+        console.error(error);
+        status.textContent = error.message ||
+            "Unable to contact the study mentor. Try again later.";
+    }
+    finally{
+        submitButton.disabled = false;
+    }
+}
+
+
+/* =====================================================
+   ADD YOUTUBE
+===================================================== */
+
+async function addYouTube(){
+
+    const title =
+        document.getElementById("youtubeTitle")
+            .value.trim();
+
+
+    const url =
+        document.getElementById("youtubeURL")
+            .value.trim();
+
+
+    if(url === ""){
+
+        showToast(
+            "Please paste a YouTube URL."
+        );
+
+        return;
+
+    }
+
+
+    let videoId = "";
+
+
+    const normal =
+        url.match(
+            /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([^?&/]+)/
+        );
+
+
+    if(normal){
+        videoId = normal[1];
+    }
+
+
+    if(videoId === ""){
+
+        showToast(
+            "Please enter a valid YouTube URL."
+        );
+
+        return;
+
+    }
+
+
+    await addToDatabase({
+
+        category:currentCategory,
+
+        type:"youtube",
+
+        name:title || "Reference YouTube Class",
+
+        url:"https://www.youtube.com/embed/" + videoId,
+
+        source:url,
+
+        created:Date.now()
+
+    });
+
+
+    document.getElementById("youtubeTitle")
+        .value = "";
+
+
+    document.getElementById("youtubeURL")
+        .value = "";
+
+
+    showToast(
+        "YouTube class added successfully!"
+    );
+
+
+    renderResources();
+
+}
+
+
+/* =====================================================
+   DISPLAY RESOURCES
+===================================================== */
+
+async function renderResources(){
+
+    const container =
+        document.getElementById("resourceList");
+
+
+    const all =
+        await getResources();
+
+
+    const resources =
+        all.filter(function(item){
+
+            return item.category === currentCategory;
+
+        });
+
+
+    container.innerHTML = "";
+
+    const curated =
+        curatedResources[currentCategory] || [];
+
+
+    if(resources.length === 0 && curated.length === 0){
+
+        container.innerHTML = `
+            <div class="empty">
+                📂<br><br>
+                <b>No resources added yet.</b>
+                <br><br>
+                Use "Add Study Files",
+                "Add Video" or
+                "Add YouTube Class".
+            </div>
+        `;
+
+        return;
+
+    }
+
+    curated.forEach(function(item){
+        const card = document.createElement("div");
+        card.className = "resource-item curated-resource";
+
+        const title = document.createElement("h3");
+        title.textContent = item.name;
+
+        const type = document.createElement("small");
+        type.textContent = "Curated online resource";
+
+        const actions = document.createElement("div");
+        actions.className = "resource-actions";
+
+        const link = document.createElement("a");
+        link.className = "btn btn-primary";
+        link.href = item.url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = "Open Resource";
+
+        actions.appendChild(link);
+        card.append(title, type, actions);
+        container.appendChild(card);
+    });
+
+
+    resources
+        .sort(function(a,b){
+
+            return b.created - a.created;
+
+        })
+        .forEach(function(item){
+
+            const card =
+                document.createElement("div");
+
+
+            card.className =
+                "resource-item";
+
+
+            let preview = "";
+
+
+            /* FILE */
+
+            if(item.type === "file"){
+
+                if(item.mime &&
+                   item.mime.startsWith("image/")){
+
+                    preview = `
+                        <img
+                            src="${item.data}"
+                            alt="${item.name}"
+                        >
+                    `;
+
+                }
+
+            }
+
+
+            /* VIDEO */
+
+            if(item.type === "video"){
+
+                preview = `
+                    <video
+                        controls
+                        src="${item.data}">
+                    </video>
+                `;
+
+            }
+
+
+            /* YOUTUBE */
+
+            if(item.type === "youtube"){
+
+                preview = `
+                    <iframe
+                        src="${item.url}"
+                        allowfullscreen>
+                    </iframe>
+                `;
+
+            }
+
+
+            let openLink = "";
+
+
+            if(item.type === "youtube"){
+
+                openLink = item.source;
+
+            }
+            else{
+
+                openLink = item.data;
+
+            }
+
+
+            card.innerHTML = `
+
+                <h3>
+                    ${item.type === "youtube"
+                    ? "▶️ "
+                    : ""}
+                    ${escapeHTML(item.name)}
+                </h3>
+
+                <small>
+                    ${
+                        item.type === "video"
+                        ? "Video"
+                        : item.type === "youtube"
+                        ? "YouTube Class"
+                        : "Study File"
+                    }
+                </small>
+
+                ${preview}
+
+                <div class="resource-actions">
+
+                    <a
+                        class="btn btn-primary"
+                        href="${openLink}"
+                        target="_blank">
+
+                        ${
+                            item.type === "youtube"
+                            ? "Open YouTube"
+                            : "Open File"
+                        }
+
+                    </a>
+
+
+                    <button
+                        class="btn btn-danger"
+                        onclick="removeResource(${item.id})">
+
+                        🗑 Remove
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            container.appendChild(card);
+
+        });
+
+}
+
+
+/* =====================================================
+   REMOVE RESOURCE
+===================================================== */
+
+async function removeResource(id){
+
+    const answer =
+        confirm(
+            "Do you want to remove this resource?"
+        );
+
+
+    if(!answer){
+        return;
+    }
+
+
+    await deleteResource(id);
+
+
+    showToast(
+        "Resource removed."
+    );
+
+
+    renderResources();
+
+}
+
+
+/* =====================================================
+   CLEAR CURRENT CATEGORY
+===================================================== */
+
+async function clearCurrentResources(){
+
+    const answer =
+        confirm(
+            "Remove all resources from this section?"
+        );
+
+
+    if(!answer){
+        return;
+    }
+
+
+    const all =
+        await getResources();
+
+
+    const selected =
+        all.filter(function(item){
+
+            return item.category === currentCategory;
+
+        });
+
+
+    for(const item of selected){
+
+        await deleteResource(item.id);
+
+    }
+
+
+    showToast(
+        "Section resources cleared."
+    );
+
+
+    renderResources();
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(text){
+
+    return String(text)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   WIKIPEDIA SEARCH
+===================================================== */
+
+async function searchWikipedia(){
+
+    const question =
+        document.getElementById("wikiQuestion")
+            .value.trim();
+
+
+    const result =
+        document.getElementById("wikiResult");
+
+
+    if(question === ""){
+
+        result.textContent = "Please enter a topic or question.";
+        return;
+
+    }
+
+    result.textContent = "🔍 Searching Wikipedia...";
+
+
+    try{
+
+        // Search Wikipedia first, then request the best match's article summary.
+        const searchURL =
+            "https://en.wikipedia.org/w/rest.php/v1/search/page?q="
+            +
+            encodeURIComponent(question)
+            +
+            "&limit=5";
+
+
+        const response =
+            await fetch(searchURL, {
+                headers:{
+                    "Api-User-Agent":"TribalUddanStudyApp/1.0"
+                }
+            });
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "Wikipedia search failed (HTTP " + response.status + ")."
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if(!data.pages ||
+           data.pages.length === 0){
+
+            result.textContent = "❌ No relevant information found.";
+            return;
+
+        }
+
+
+        const page =
+            data.pages[0];
+
+
+        const summaryURL =
+            "https://en.wikipedia.org/api/rest_v1/page/summary/"
+            +
+            encodeURIComponent(page.key);
+
+
+        const summaryResponse =
+            await fetch(summaryURL, {
+                headers:{
+                    "Api-User-Agent":"TribalUddanStudyApp/1.0"
+                }
+            });
+
+        if(!summaryResponse.ok){
+            throw new Error(
+                "Wikipedia article summary failed (HTTP " +
+                summaryResponse.status +
+                ")."
+            );
+        }
+
+        const summary =
+            await summaryResponse.json();
+
+        const resultCard = document.createElement("div");
+        resultCard.className = "search-result";
+
+        const heading = document.createElement("h2");
+        heading.textContent = summary.title || page.title || "Wikipedia result";
+
+        const extract = document.createElement("p");
+        extract.textContent =
+            summary.extract ||
+            "Information was found, but a summary is not available.";
+
+        resultCard.append(heading, extract);
+
+        const articleURL =
+            summary.content_urls &&
+            summary.content_urls.desktop &&
+            summary.content_urls.desktop.page;
+
+        if(articleURL){
+            const articleLink = document.createElement("a");
+            articleLink.href = articleURL;
+            articleLink.target = "_blank";
+            articleLink.rel = "noopener noreferrer";
+            articleLink.textContent = "📖 Read full Wikipedia article";
+            resultCard.appendChild(articleLink);
+        }
+
+        result.replaceChildren(resultCard);
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        result.textContent =
+            error.message ||
+            "⚠️ Unable to get information from Wikipedia.";
+
+    }
+
+}
+
+
+/* =====================================================
+   GLOBAL SEARCH
+===================================================== */
+
+function globalSearch(){
+
+    const value =
+        document.getElementById("globalSearch")
+            .value
+            .toLowerCase();
+
+
+    if(value.includes("learn")){
+
+        showPage("learn");
+
+    }
+
+    else if(value.includes("practice")){
+
+        showPage("practice");
+
+    }
+
+    else if(value.includes("career")){
+
+        showPage("career");
+
+    }
+
+    else if(value.includes("material")){
+
+        showPage("materials");
+
+    }
+
+    else if(value.includes("video")){
+
+        showPage("videos");
+
+    }
+
+}
+
+
+/* =====================================================
+   DARK MODE
+===================================================== */
+
+function toggleDarkMode(){
+
+    document.body.classList.toggle("dark");
+
+
+    if(document.body.classList.contains("dark")){
+
+        document.body.style.background =
+            "#10231f";
+
+        document.body.style.color =
+            "#e8f4ef";
+
+        showToast("Dark mode enabled.");
+
+    }
+    else{
+
+        document.body.style.background =
+            "#f4f8f5";
+
+        document.body.style.color =
+            "#123d35";
+
+        showToast("Light mode enabled.");
+
+    }
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout(){
+
+    const answer =
+        confirm(
+            "Are you sure you want to logout?"
+        );
+
+
+    if(answer){
+
+        showToast(
+            "Logout action triggered."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   STARTUP
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        renderTabs();
+
+    }
+);
+
+</script>
+
+</body>
+</html>

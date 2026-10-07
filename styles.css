@@ -1,0 +1,1264 @@
+/*  BASIC RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #173b35;
+    background-color: #eef7f3;
+    line-height: 1.6;
+}
+
+/*  HEADER */
+.main-header {
+    min-height: 80px;
+    background: rgba(255, 255, 255, 0.97);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    padding: 15px 5%;
+    border-bottom: 1px solid #dceae5;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 220px;
+}
+.logo-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e5f4ec;
+    border-radius: 50%;
+    font-size: 25px;
+}
+.logo-area h1 {
+    font-size: 21px;
+    color: #12633f;
+}
+.logo-area p {
+    color: #54746a;
+    font-size: 13px;
+}
+
+/*   SEARCH */
+.header-search {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    max-width: 480px;
+    background: #f4f8f7;
+    border: 1px solid #d7e5df;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+
+.header-search input {
+
+    flex: 1;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    padding: 13px 18px;
+
+    font-size: 14px;
+}
+
+
+.header-search button {
+
+    border: none;
+
+    background: #147d55;
+
+    color: white;
+
+    width: 50px;
+
+    height: 45px;
+
+    cursor: pointer;
+
+    font-size: 17px;
+}
+
+
+
+/* =========================
+   HEADER BUTTONS
+========================= */
+
+.header-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.header-actions select {
+
+    border: 1px solid #c9ddd5;
+
+    background: white;
+
+    padding: 10px 12px;
+
+    border-radius: 10px;
+
+    color: #174c3b;
+
+    cursor: pointer;
+}
+
+
+.login-btn {
+
+    border: none;
+
+    background: #126a47;
+
+    color: white;
+
+    padding: 11px 18px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+
+.login-btn:hover {
+
+    background: #0c5137;
+
+    transform: translateY(-2px);
+}
+
+
+
+/* =========================
+   MARQUEE
+========================= */
+
+.marquee-container {
+
+    background: #0d6545;
+
+    color: white;
+
+    padding: 8px 0;
+
+    font-size: 14px;
+
+    letter-spacing: 0.2px;
+}
+
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+
+    min-height: 430px;
+
+    background-image:
+
+        linear-gradient(
+            rgba(8, 60, 44, 0.58),
+            rgba(8, 60, 44, 0.68)
+        ),
+
+        url("");
+
+    /*
+        ADD YOUR IMAGE HERE
+
+        Example:
+
+        url("images/farmer-field.jpg")
+    */
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    display: flex;
+
+    align-items: center;
+
+    position: relative;
+}
+
+
+.hero-overlay {
+
+    width: 100%;
+
+    padding: 70px 8%;
+}
+
+
+.hero-content {
+
+    max-width: 650px;
+
+    color: white;
+}
+
+
+.hero-tag {
+
+    display: inline-block;
+
+    background: rgba(255, 255, 255, 0.15);
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+
+    padding: 7px 14px;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+
+    margin-bottom: 18px;
+}
+
+
+.hero-content h2 {
+
+    font-size: clamp(38px, 6vw, 64px);
+
+    line-height: 1.1;
+
+    margin-bottom: 20px;
+}
+
+
+.hero-content p {
+
+    font-size: 18px;
+
+    max-width: 600px;
+
+    color: #f3faf7;
+
+    margin-bottom: 30px;
+}
+
+
+.hero-buttons {
+
+    display: flex;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+
+.primary-btn,
+.secondary-btn {
+
+    text-decoration: none;
+
+    padding: 13px 22px;
+
+    border-radius: 10px;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+
+.primary-btn {
+
+    background: #ffffff;
+
+    color: #12633f;
+}
+
+
+.secondary-btn {
+
+    background: rgba(255,255,255,0.12);
+
+    color: white;
+
+    border: 1px solid rgba(255,255,255,0.5);
+}
+
+
+.primary-btn:hover,
+.secondary-btn:hover {
+
+    transform: translateY(-3px);
+}
+
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard {
+
+    width: 90%;
+
+    max-width: 1200px;
+
+    margin: -45px auto 40px;
+
+    position: relative;
+
+    z-index: 5;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+}
+
+
+.dashboard-card {
+
+    background: rgba(255,255,255,0.97);
+
+    padding: 22px;
+
+    border-radius: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    box-shadow: 0 10px 30px rgba(19, 68, 53, 0.12);
+
+    border: 1px solid #e0eee8;
+
+    transition: 0.3s;
+}
+
+
+.dashboard-card:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow: 0 15px 35px rgba(19, 68, 53, 0.18);
+}
+
+
+.dashboard-card p {
+
+    color: #648077;
+
+    font-size: 13px;
+}
+
+
+.dashboard-card h2 {
+
+    color: #12633f;
+
+    margin-top: 3px;
+}
+
+
+.dashboard-icon {
+
+    width: 50px;
+
+    height: 50px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 14px;
+
+    font-size: 22px;
+}
+
+
+.dashboard-icon.green {
+
+    background: #e4f4eb;
+}
+
+
+.dashboard-icon.blue {
+
+    background: #e4f0f8;
+}
+
+
+
+/* =========================
+   MAIN THREE COLUMNS
+========================= */
+
+.main-container {
+
+    width: 90%;
+
+    max-width: 1200px;
+
+    margin: 0 auto 35px;
+
+    display: grid;
+
+    grid-template-columns: 0.85fr 1.5fr 0.85fr;
+
+    gap: 20px;
+
+    align-items: stretch;
+}
+
+
+.content-card {
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 24px;
+
+    border: 1px solid #dcece5;
+
+    box-shadow: 0 8px 25px rgba(25, 75, 59, 0.08);
+}
+
+
+.section-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 20px;
+}
+
+
+.section-icon {
+
+    width: 45px;
+
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #e6f4ed;
+
+    border-radius: 12px;
+
+    font-size: 20px;
+}
+
+
+.section-heading h2 {
+
+    color: #155d42;
+
+    font-size: 20px;
+}
+
+
+.section-heading p {
+
+    color: #789087;
+
+    font-size: 12px;
+}
+
+
+
+/* =========================
+   SCHEME SELECT
+========================= */
+
+.scheme-select {
+
+    width: 100%;
+
+    padding: 13px;
+
+    border: 1px solid #cfe0d9;
+
+    border-radius: 10px;
+
+    background: #f8fbfa;
+
+    color: #204b3c;
+
+    outline: none;
+
+    margin-bottom: 18px;
+}
+
+
+.scheme-select:focus {
+
+    border-color: #18845a;
+}
+
+
+
+/* =========================
+   IMAGE SECTIONS
+========================= */
+
+.scheme-image,
+.info-image,
+.farmer-image {
+
+    width: 100%;
+
+    height: 150px;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    background: #e7f1ed;
+
+    margin-bottom: 18px;
+}
+
+
+.scheme-image img,
+.info-image img,
+.farmer-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/*
+    When you add your image:
+
+    <img src="images/farmer.jpg">
+
+    it will automatically fit this area.
+*/
+
+
+
+/* =========================
+   SCHEME DETAILS
+========================= */
+
+.scheme-details {
+
+    background: #f5faf7;
+
+    border-left: 4px solid #168258;
+
+    padding: 18px;
+
+    border-radius: 10px;
+}
+
+
+.scheme-details h3 {
+
+    color: #12633f;
+
+    margin-bottom: 10px;
+}
+
+
+.scheme-details p {
+
+    color: #526b62;
+
+    font-size: 14px;
+}
+
+
+
+/* =========================
+   INFORMATION
+========================= */
+
+.info-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+}
+
+
+.info-item {
+
+    display: flex;
+
+    gap: 12px;
+}
+
+
+.info-item > span {
+
+    width: 32px;
+
+    height: 32px;
+
+    min-width: 32px;
+
+    background: #e8f5ee;
+
+    color: #12734c;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: bold;
+}
+
+
+.info-item h3 {
+
+    font-size: 15px;
+
+    color: #205645;
+}
+
+
+.info-item p {
+
+    font-size: 13px;
+
+    color: #71857d;
+}
+
+
+.website-btn {
+
+    width: 100%;
+
+    margin-top: 22px;
+
+    padding: 12px;
+
+    border: none;
+
+    background: #147653;
+
+    color: white;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+
+
+/* =========================
+   FARMER DETAILS
+========================= */
+
+.farmer-image {
+
+    height: 180px;
+}
+
+
+.farmer-details {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+.detail-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding-bottom: 10px;
+
+    border-bottom: 1px solid #edf2f0;
+
+    font-size: 13px;
+}
+
+
+.detail-row span {
+
+    color: #71847d;
+}
+
+
+.detail-row strong {
+
+    color: #23634c;
+}
+
+
+.profile-btn {
+
+    width: 100%;
+
+    margin-top: 20px;
+
+    padding: 11px;
+
+    border: 1px solid #147653;
+
+    color: #147653;
+
+    background: white;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+}
+
+
+
+/* =========================
+   WIDE SECTIONS
+========================= */
+
+.wide-section {
+
+    width: 90%;
+
+    max-width: 1200px;
+
+    margin: 20px auto;
+
+    padding: 28px;
+
+    background: white;
+
+    border-radius: 20px;
+
+    border: 1px solid #dcece5;
+
+    box-shadow: 0 8px 25px rgba(25, 75, 59, 0.07);
+}
+
+
+.wide-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 22px;
+}
+
+
+.wide-heading > span {
+
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 13px;
+
+    background: #e5f4ed;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 22px;
+}
+
+
+.wide-heading h2 {
+
+    color: #155d42;
+}
+
+
+.wide-heading p {
+
+    font-size: 13px;
+
+    color: #758981;
+}
+
+
+
+/* =========================
+   BANK
+========================= */
+
+.bank-box {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    background: #f4faf7;
+
+    padding: 22px;
+
+    border-radius: 15px;
+
+    border: 1px solid #dcece5;
+}
+
+
+.bank-box p {
+
+    margin: 5px 0;
+
+    color: #536d63;
+}
+
+
+.bank-box button {
+
+    border: none;
+
+    background: #126d49;
+
+    color: white;
+
+    padding: 12px 18px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+}
+
+
+.verified {
+
+    color: #16804f;
+
+    font-weight: bold;
+}
+
+
+
+/* =========================
+   DOCUMENTS
+========================= */
+
+.documents {
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+
+.documents label {
+
+    background: #f5faf7;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    border: 1px solid #dfece6;
+
+    cursor: pointer;
+
+    color: #365d4f;
+}
+
+
+.documents input {
+
+    margin-right: 8px;
+}
+
+
+#documentStatus {
+
+    margin-top: 15px;
+
+    color: #16734d;
+
+    font-weight: bold;
+}
+
+
+
+/* =========================
+   API SEARCH
+========================= */
+
+.api-search {
+
+    display: flex;
+
+    gap: 10px;
+}
+
+
+.api-search input {
+
+    flex: 1;
+
+    padding: 13px 16px;
+
+    border: 1px solid #ccdcd6;
+
+    border-radius: 10px;
+
+    outline: none;
+}
+
+
+.api-search button {
+
+    background: #156e4b;
+
+    color: white;
+
+    border: none;
+
+    padding: 0 25px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+}
+
+
+#apiResult {
+
+    margin-top: 20px;
+
+    padding: 15px;
+
+    background: #f5faf7;
+
+    border-radius: 12px;
+}
+
+
+
+/* =========================
+   AP GOVERNMENT
+========================= */
+
+.government-banner {
+
+    width: 90%;
+
+    max-width: 1200px;
+
+    min-height: 230px;
+
+    margin: 30px auto;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    background: #075b43;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+}
+
+
+.government-image {
+
+    width: 45%;
+
+    height: 230px;
+
+    background: #0c6b50;
+}
+
+
+.government-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.government-content {
+
+    padding: 35px;
+
+}
+
+
+.government-content h2 {
+
+    font-size: 30px;
+
+    margin-bottom: 8px;
+}
+
+
+.government-content p {
+
+    color: #d8eee6;
+}
+
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+
+    background: #083e30;
+
+    color: white;
+
+    padding: 35px 5%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    flex-wrap: wrap;
+}
+
+
+footer h3 {
+
+    margin-bottom: 5px;
+}
+
+
+footer p {
+
+    color: #bdd8cf;
+
+    font-size: 13px;
+}
+
+
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media (max-width: 950px) {
+
+    .main-header {
+
+        flex-wrap: wrap;
+    }
+
+
+    .header-search {
+
+        order: 3;
+
+        max-width: none;
+
+        width: 100%;
+    }
+
+
+    .dashboard {
+
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    .main-container {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .documents {
+
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .main-header {
+
+        padding: 12px 4%;
+    }
+
+
+    .logo-area h1 {
+
+        font-size: 18px;
+    }
+
+
+    .header-actions {
+
+        width: 100%;
+
+        justify-content: space-between;
+    }
+
+
+    .hero {
+
+        min-height: 500px;
+    }
+
+
+    .hero-overlay {
+
+        padding: 50px 7%;
+    }
+
+
+    .hero-content h2 {
+
+        font-size: 40px;
+    }
+
+
+    .hero-content p {
+
+        font-size: 15px;
+    }
+
+
+    .dashboard {
+
+        width: 92%;
+
+        grid-template-columns: 1fr;
+
+        margin-top: 20px;
+    }
+
+
+    .main-container,
+    .wide-section,
+    .government-banner {
+
+        width: 92%;
+    }
+
+
+    .bank-box {
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .documents {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .api-search {
+
+        flex-direction: column;
+    }
+
+
+    .api-search button {
+
+        padding: 12px;
+    }
+
+
+    .government-banner {
+
+        flex-direction: column;
+    }
+
+
+    .government-image {
+
+        width: 100%;
+
+        height: 180px;
+    }
+
+
+    .government-content {
+
+        padding: 25px;
+    }
+
+}
